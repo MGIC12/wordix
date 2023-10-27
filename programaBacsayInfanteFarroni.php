@@ -27,8 +27,8 @@ function cargarColeccionPalabras()
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
-        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS"
-        /* Agregar 5 palabras más */
+        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
+        "ARBOL", "HOJAS", "ACERO", "ACIDO", "ARROZ"
     ];
 
     return ($coleccionPalabras);
