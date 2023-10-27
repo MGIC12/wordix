@@ -34,6 +34,26 @@ function cargarColeccionPalabras()
     return ($coleccionPalabras);
 }
 
+
+/** Muestra el menú para el usuario
+ * @param string $player
+ */
+function mostrarMenu()
+{
+    //$opcionMenu
+    echo "\n";
+    echo "******************************************************************\n";
+    echo "1) Jugar Wordix con una palabra predeterminada                    \n";
+    echo "2) Jugar Wordix con una palabra aleatoria                         \n";
+    echo "3) Mostrar una partida                                            \n";
+    echo "4) Mostrar la primera partida ganadora                            \n";
+    echo "5) Mostrar resumen de un jugador                                  \n";
+    echo "6) Mostrar listado de partidas ordenadas por jugador y por palabra\n";
+    echo "7) Agregar una palabra de 5 letras                                \n";
+    echo "8) Salir                                                          \n";
+    echo "******************************************************************\n";
+}
+
 /* ****COMPLETAR***** */
 
 
@@ -46,9 +66,43 @@ function cargarColeccionPalabras()
 
 
 //Inicialización de variables:
-
+$opcionMenu = 0;
+$minMenu = 1;
+$maxMenu = 8;
 
 //Proceso:
+
+do {
+    mostrarMenu();
+    echo "Seleccione opción: \n";
+    $opcionMenu = solicitarNumeroEntre($minMenu, $maxMenu);
+    switch ($opcionMenu){
+        case 1:
+            echo "1";
+            break;
+        case 2:
+            echo "2";
+            break;
+        case 3:
+            echo "3";
+            break;
+        case 4:
+            echo "4";
+            break;
+        case 5:
+            echo "5";
+            break;
+        case 6;
+            echo "6";
+            break;
+        case 7:
+            echo "7";
+            break;
+        case 8:
+            echo "Gracias por jugar...";
+            break;
+    }
+} while ($opcionMenu != 8);
 
 $partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
