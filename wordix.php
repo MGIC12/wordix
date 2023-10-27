@@ -27,7 +27,11 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
+ *  ****COMPLETADO*****
+ *  detecta si un string es un nnumero y lo convierte en numero y lo solicita nuevamente si no cumple las condiciones
+ *  @param int $min
+ *  @param int $max
+ *  @return float
  */
 function solicitarNumeroEntre($min, $max)
 {
@@ -120,7 +124,9 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * ****COMPLETADO*****
+ * Le da la bienvenida al usuario
+ * @param string $usuario
  */
 function escribirMensajeBienvenida($usuario)
 {
@@ -133,7 +139,11 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ * ****COMPLETADO*****
+ * Identifica si todos los caracteres de una palabra son letras
+ * @param string $cadena
+ * @return boolean
+ * 
  */
 function esPalabra($cadena)
 {
@@ -149,7 +159,9 @@ function esPalabra($cadena)
 }
 
 /**
- *  ****COMPLETAR*****
+ *  ****COMPLETADO*****
+ *  Convierte la palabra ingresada en mayusculas e identifica si lo ingresado no cumple con las condiciones
+ *  @return string
  */
 function leerPalabra5Letras()
 {
