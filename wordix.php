@@ -28,7 +28,7 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 
 /**
  *  ****COMPLETADO*****
- *  detecta si un string es un nnumero y lo convierte en numero y lo solicita nuevamente si no cumple las condiciones
+ *  le pide un numero al usuario entre uno y otro
  *  @param int $min
  *  @param int $max
  *  @return float
