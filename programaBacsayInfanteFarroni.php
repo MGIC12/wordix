@@ -54,6 +54,20 @@ function mostrarMenu()
     echo "******************************************************************\n";
 }
 
+
+/**
+ * devuelve una palabra aleatoria de la coleccion
+ * @param array $colecPalab
+ * @return string
+ */
+function opcAleatoria ($colecPalab){
+    // int $max, $numAleatorio, string $palab
+    $max=count($colecPalab);
+    $numAleatorio=rand(0,$max-1);
+    $palab=$colecPalab[$numAleatorio];
+    return ($palab);
+}
+
 /* ****COMPLETAR***** */
 
 
@@ -81,7 +95,12 @@ do {
             echo "1";
             break;
         case 2:
-            echo "2";
+            // string $nombre $palabraSelecc, $partida array $coleccionPalabras
+            echo "Ingrese su nombre: ";
+            $nombre=trim(fgets(STDIN));
+            $coleccionPalabras=cargarColeccionPalabras();
+            $palabraSelecc=opcAleatoria($coleccionPalabras);
+            $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             break;
         case 3:
             echo "3";
