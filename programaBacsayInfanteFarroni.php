@@ -108,6 +108,23 @@ return ($coleccionPart);
 }
 
 
+/**
+ * Muestra el historial de la partida
+ * @param array $coleccionHistorial
+ * @param int $numPart
+ */
+function mostrarHistorial($coleccionHistorial, $numPart){
+    $partida = $coleccionHistorial[$numPart];
+    if ($partida["intentos"]>0){
+        echo "Partida WORDIX ".($numPart+1).": palabra ". $partida["palabraWordix"] . "\n" . "Jugador: " . $partida["jugador"] . "\n" . "Puntaje: " . $partida["puntaje"] . " puntos\n" . "Intento: Adivinó la palabra en " . $partida["intentos"] . " intentos";
+    } else {
+
+        echo "Partida WORDIX " . $numPart . ": palabra " . $partida["palabraWordix"] . "\n" . "Jugador: " . $partida["jugador"] . "\n" . "Puntaje: " . $partida["puntaje"] . " puntos" . "\n" . "Intento: No adivinó la palabra.";
+    }
+
+}
+
+
 /* ****COMPLETAR***** */
 
 
@@ -125,21 +142,6 @@ $minMenu = 1;
 $maxMenu = 8;
 $coleccionPartidas = cargarColeccionPalabras();
 
-/**
- * Muestra el historial de la partida
- * @param array $coleccionHistorial
- * @param int $numPart
- */
-function mostrarHistorial($coleccionHistorial, $numPart){
-    $partida = $coleccionHistorial[$numPart];
-    if ($partida["intentos"]>0){
-        echo "Partida WORDIX ".($numPart+1).": palabra ". $partida["palabraWordix"] . "\n" . "Jugador: " . $partida["jugador"] . "\n" . "Puntaje: " . $partida["puntaje"] . " puntos\n" . "Intento: Adivinó la palabra en " . $partida["intentos"] . " intentos";
-    } else {
-
-        echo "Partida WORDIX " . $numPart . ": palabra " . $partida["palabraWordix"] . "\n" . "Jugador: " . $partida["jugador"] . "\n" . "Puntaje: " . $partida["puntaje"] . " puntos" . "\n" . "Intento: No adivinó la palabra.";
-    }
-
-}
 
 //Proceso:
 
