@@ -140,7 +140,7 @@ function mostrarHistorial($coleccionHistorial, $numPart){
 $opcionMenu = 0;
 $minMenu = 1;
 $maxMenu = 8;
-$coleccionPartidas = cargarColeccionPalabras();
+$coleccionPartidas = cargarColeccionPartidas();
 
 
 //Proceso:
