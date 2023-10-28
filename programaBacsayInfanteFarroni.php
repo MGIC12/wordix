@@ -124,6 +124,27 @@ function mostrarHistorial($coleccionHistorial, $numPart){
 
 }
 
+/** Determina el indice Minimo de un array
+ * @param int $max
+ * @return int
+ */
+function indiceMin($max)
+{
+    //int $indMin
+    $indMin = $max - $max;
+    return $indMin;
+}
+
+/** Determina el indice maximo de un array
+ * @param array $coleccionPalabras
+ * @return int
+ */
+function indiceMax($coleccionPalabras)
+{
+    //int $indMax
+    $indMax = count($coleccionPalabras) - 1;
+    return $indMax;
+}
 
 /* ****COMPLETAR***** */
 
@@ -166,7 +187,9 @@ do {
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             break;
         case 3:
-            echo "Seleccione una partida entre la partida N° "."y la N° "."\n";
+            $maxArray = indiceMax($coleccionPartidas);
+            $minArray = indiceMin($maxArray);
+            echo "Seleccione una partida entre la partida N° ".($minArray +1)."y la N° ".($maxArray+1)."\n";
             $numPartida = trim(fgets(STDIN));
             $numPartida = $numPartida - 1;
             if (($numPartida >=0) && ($numPartida < count($coleccionPartidas))){
