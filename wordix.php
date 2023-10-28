@@ -160,7 +160,7 @@ function esPalabra($cadena)
 
 /**
  *  ****COMPLETADO*****
- *  Convierte la palabra ingresada en mayusculas e identifica si lo ingresado no cumple con las condiciones
+ *  Convierte la palabra ingresada en mayusculas e identifica si lo ingresado no cumple con las condiciones de la palabra
  *  @return string
  */
 function leerPalabra5Letras()
@@ -179,7 +179,7 @@ function leerPalabra5Letras()
 
 
 /**
- * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
+ * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?, asociativo
  *@return array
  */
 function iniciarTeclado()
