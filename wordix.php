@@ -362,7 +362,6 @@ function jugarWordix($palabraWordix, $nombreUsuario)
     /*Inicialización*/
     $arregloDeIntentosWordix = [];
     $teclado = iniciarTeclado();
-    logo();
     escribirMensajeBienvenida($nombreUsuario);
     $nroIntento = 1;
     do {
