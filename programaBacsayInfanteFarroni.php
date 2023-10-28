@@ -211,16 +211,12 @@ do {
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             break;
         case 3:
-            $maxArray = indiceMax($coleccionPartidas);
+            $maxArray = indiceMax($coleccionPartidas)+1;
             $minArray = indiceMin($maxArray);
-            echo "Seleccione una partida entre la partida N° ".($minArray +1)."y la N° ".($maxArray+1)."\n";
-            $numPartida = trim(fgets(STDIN));
+            echo "Seleccione una partida entre la partida N° ".($minArray +1)." y la N° ".($maxArray)."\n";
+            $numPartida = solicitarNumeroEntre(1, $maxArray);
             $numPartida = $numPartida - 1;
-            if (($numPartida >=0) && ($numPartida < count($coleccionPartidas))){
                 mostrarHistorial($coleccionPartidas, $numPartida);
-            }else{
-                echo "No hay ninguna partida correspondiente con el número ingresado...";
-            }
             break;
         case 4:
             echo "4";
