@@ -41,6 +41,7 @@ function cargarColeccionPalabras()
 function mostrarMenu()
 {
     //$opcionMenu
+    logo();
     echo "\n";
     echo "******************************************************************\n";
     echo "1) Jugar Wordix con una palabra predeterminada                    \n";
