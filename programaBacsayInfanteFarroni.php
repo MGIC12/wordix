@@ -56,6 +56,22 @@ function mostrarMenu()
 
 
 /**
+     * Devuelve una palabra del listado a partir de un numero
+     * @param array $coleccion
+     * @return string 
+     */
+    function palabraElegida ($coleccion){
+        $max=count($coleccion);
+        echo "Ingrse el numero de la palabra: ";
+        $numPalabra=solicitarNumeroEntre(1, $max)-1;
+           $palabraEleg=$coleccion[$numPalabra];
+        
+    return $palabraEleg;
+
+    }
+
+
+/**
  * devuelve una palabra aleatoria de la coleccion
  * @param array $colecPalab
  * @return string
@@ -92,7 +108,11 @@ do {
     $opcionMenu = solicitarNumeroEntre($minMenu, $maxMenu);
     switch ($opcionMenu){
         case 1:
-            echo "1";
+            echo "Ingrese su nombre: ";
+            $nombre=trim(fgets(STDIN));
+            $coleccionPalabras=cargarColeccionPalabras();
+            $palabraSelecc=palabraElegida($coleccionPalabras);
+            $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             break;
         case 2:
             // string $nombre $palabraSelecc, $partida array $coleccionPalabras
@@ -123,7 +143,7 @@ do {
     }
 } while ($opcionMenu != 8);
 
-$partida = jugarWordix("MELON", strtolower("MaJo"));
+/**$partida = jugarWordix("MELON", strtolower("MaJo"));*/
 //print_r($partida);
 //imprimirResultado($partida);
 
