@@ -56,13 +56,23 @@ function mostrarMenu()
 
 
 /**
+ * Le pregunta al usuario su nombre
+ * @return string
+ */
+function preguntaNombre (){
+    echo "Ingrese su nombre: ";
+    $usuario=trim(fgets(STDIN));
+    return ($usuario);
+}
+
+/**
      * Devuelve una palabra del listado a partir de un numero
      * @param array $coleccion
      * @return string 
      */
     function palabraElegida ($coleccion){
         $max=count($coleccion);
-        echo "Ingrse el numero de la palabra: ";
+        echo "Ingrese el numero de la palabra: ";
         $numPalabra=solicitarNumeroEntre(1, $max)-1;
            $palabraEleg=$coleccion[$numPalabra];
         
@@ -172,16 +182,14 @@ do {
     $opcionMenu = solicitarNumeroEntre($minMenu, $maxMenu);
     switch ($opcionMenu){
         case 1:
-            echo "Ingrese su nombre: ";
-            $nombre=trim(fgets(STDIN));
+            $nombre=preguntaNombre();
             $coleccionPalabras=cargarColeccionPalabras();
             $palabraSelecc=palabraElegida($coleccionPalabras);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             break;
         case 2:
             // string $nombre $palabraSelecc, $partida array $coleccionPalabras
-            echo "Ingrese su nombre: ";
-            $nombre=trim(fgets(STDIN));
+            $nombre=preguntaNombre();
             $coleccionPalabras=cargarColeccionPalabras();
             $palabraSelecc=opcAleatoria($coleccionPalabras);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
