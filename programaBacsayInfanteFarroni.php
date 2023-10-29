@@ -59,7 +59,7 @@ function mostrarMenu()
     logo();
     echo "\n";
     echo "******************************************************************\n";
-    echo "1) Jugar Wordix con una palabra predeterminada                    \n";
+    echo "1) Jugar Wordix con una palabra elegida                           \n";
     echo "2) Jugar Wordix con una palabra aleatoria                         \n";
     echo "3) Mostrar una partida                                            \n";
     echo "4) Mostrar la primera partida ganadora                            \n";
