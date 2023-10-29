@@ -28,7 +28,7 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 
 /**
  *  ****COMPLETADO*****
- *  detecta si un string es un nnumero y lo convierte en numero y lo solicita nuevamente si no cumple las condiciones
+ *  le pide un numero al usuario entre uno y otro
  *  @param int $min
  *  @param int $max
  *  @return float
@@ -160,7 +160,7 @@ function esPalabra($cadena)
 
 /**
  *  ****COMPLETADO*****
- *  Convierte la palabra ingresada en mayusculas e identifica si lo ingresado no cumple con las condiciones
+ *  Convierte la palabra ingresada en mayusculas e identifica si lo ingresado no cumple con las condiciones de la palabra
  *  @return string
  */
 function leerPalabra5Letras()
@@ -179,7 +179,7 @@ function leerPalabra5Letras()
 
 
 /**
- * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
+ * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?, asociativo
  *@return array
  */
 function iniciarTeclado()
@@ -362,7 +362,6 @@ function jugarWordix($palabraWordix, $nombreUsuario)
     /*Inicialización*/
     $arregloDeIntentosWordix = [];
     $teclado = iniciarTeclado();
-    logo();
     escribirMensajeBienvenida($nombreUsuario);
     $nroIntento = 1;
     do {

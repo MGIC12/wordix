@@ -56,7 +56,6 @@ function logo(){
 function mostrarMenu()
 {
     //$opcionMenu
-    logo();
     echo "\n";
     echo "******************************************************************\n";
     echo "1) Jugar Wordix con una palabra elegida                           \n";
@@ -172,6 +171,33 @@ function indiceMax($coleccionPalabras)
     return $indMax;
 }
 
+
+/**
+ * Texto final del juego
+ */
+function textoSalir(){
+    echo " 
+    __                                                       
+   / _   _  _   _ .  _   _    _   _   _   .      _   _   _ | 
+   \__) |  (_| (_ | (_| _)   |_) (_) |    | |_| (_) (_| |  . 
+                             |            /     _/           \n";
+    echo "
+    ░░░░░░░░░░░░░░░░░░░░░░█████████░░░░░░░░░
+    ░░███████░░░░░░░░░░███▒▒▒▒▒▒▒▒███░░░░░░░
+    ░░█▒▒▒▒▒▒█░░░░░░░███▒▒▒▒▒▒▒▒▒▒▒▒▒███░░░░
+    ░░░█▒▒▒▒▒▒█░░░░██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░
+    ░░░░█▒▒▒▒▒█░░░██▒▒▒▒▒██▒▒▒▒▒▒██▒▒▒▒▒███░
+    ░░░░░█▒▒▒█░░░█▒▒▒▒▒▒████▒▒▒▒████▒▒▒▒▒▒██
+    ░░░█████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██
+    ░░░█▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒██
+    ░██▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒██▒▒▒▒▒▒▒▒▒▒██▒▒▒▒██
+    ██▒▒▒███████████▒▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒▒██
+    █▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒████████▒▒▒▒▒▒▒██
+    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░
+    ░█▒▒▒███████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░░
+    ░██▒▒▒▒▒▒▒▒▒▒████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█░░░░░
+    ░░████████████░░░█████████████████░░░░░░";
+}
 /* ****COMPLETAR***** */
 
 
@@ -192,6 +218,9 @@ $coleccionPartidas = cargarColeccionPartidas();
 
 //Proceso:
 
+
+
+logo();
 do {
     mostrarMenu();
     echo "Seleccione opción: \n";
@@ -216,7 +245,9 @@ do {
             echo "Seleccione una partida entre la partida N° ".($minArray +1)." y la N° ".($maxArray)."\n";
             $numPartida = solicitarNumeroEntre(1, $maxArray);
             $numPartida = $numPartida - 1;
+                echo "\n******************************************************************\n";
                 mostrarHistorial($coleccionPartidas, $numPartida);
+                echo "\n******************************************************************\n";
             break;
         case 4:
             echo "4";
@@ -231,7 +262,7 @@ do {
             echo "7";
             break;
         case 8:
-            echo "Gracias por jugar...";
+            textoSalir();
             break;
     }
 } while ($opcionMenu != 8);
