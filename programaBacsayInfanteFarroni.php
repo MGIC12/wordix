@@ -109,29 +109,28 @@ function opcAleatoria ($colecPalab){
     return ($palab);
 }
 
+
 /**
- * Obtiene una colección/historial de partidas pasadas
+ * obtiene una coleccion de partidas pasadas
  * @return array $coleccionPart
  */
-function cargarColeccionPartidas() {
-    $coleccionPart = [];
-$part1 = ["palabraWordix" => "1", "jugador" => "n1", "intentos" => 0, "puntaje" => 0];
-$part2 = ["palabraWordix" => "2", "jugador" => "n2", "intentos" => 0, "puntaje" => 0];
-$part3 = ["palabraWordix" => "3", "jugador" => "n3", "intentos" => 3, "puntaje" => 9];
-$part4 = ["palabraWordix" => "4", "jugador" => "n4", "intentos" => 4, "puntaje" => 8];
-$part5 = ["palabraWordix" => "5", "jugador" => "n5", "intentos" => 0, "puntaje" => 0];
-$part6 = ["palabraWordix" => "6", "jugador" => "n6", "intentos" => 5, "puntaje" => 7];
-$part7 = ["palabraWordix" => "7", "jugador" => "n7", "intentos" => 5, "puntaje" => 7];
-$part8 = ["palabraWordix" => "8", "jugador" => "n8", "intentos" => 0, "puntaje" => 0];
-$part9 = ["palabraWordix" => "9", "jugador" => "n9", "intentos" => 4, "puntaje" => 8];
-$part10 = ["palabraWordix" => "10", "jugador" => "n10", "intentos" => 0, "puntaje" => 0];
-$part11 = ["palabraWordix" => "11", "jugador" => "n11", "intentos" => 2, "puntaje" => 10];
-$part12 = ["palabraWordix" => "12", "jugador" => "n12", "intentos" => 0, "puntaje" => 0];
+function cargarColeccionPartidas(){
+    $coleccion = [];
+    $coleccion[0] = ["palabraWordix" => "QUESO", "jugador" => "gaspar", "intentos" => 5, "puntaje" => 11];
+    $coleccion[1] = ["palabraWordix" => "PIANO", "jugador" => "gaspar", "intentos" => 3, "puntaje" => 13];
+    $coleccion[2] = ["palabraWordix" => "ACERO", "jugador" => "julian", "intentos" => 0, "puntaje" => 0];
+    $coleccion[3] = ["palabraWordix" => "MELON", "jugador" => "facu", "intentos" => 4, "puntaje" => 12];
+    $coleccion[4] = ["palabraWordix" => "GOTAS", "jugador" => "julian", "intentos" => 3, "puntaje" => 13];
+    $coleccion[5] = ["palabraWordix" => "GOTAS", "jugador" => "gaspar", "intentos" => 1, "puntaje" => 15];
+    $coleccion[6] = ["palabraWordix" => "VERDE", "jugador" => "marcos", "intentos" => 5, "puntaje" => 12];
+    $coleccion[7] = ["palabraWordix" => "ACERO", "jugador" => "facu", "intentos" => 6, "puntaje" => 9];
+    $coleccion[8] = ["palabraWordix" => "HOJAS", "jugador" => "gaspar", "intentos" => 0, "puntaje" => 0];
+    $coleccion[9] = ["palabraWordix" => "ARBOL", "jugador" => "julian", "intentos" => 2, "puntaje" => 14];
+    $coleccion[10] = ["palabraWordix" => "YUYOS", "jugador" => "marcos", "intentos" => 3, "puntaje" => 15];
+    $coleccion[11] = ["palabraWordix" => "TINTO", "jugador" => "gaspar", "intentos" => 4, "puntaje" => 14];
 
-array_push($coleccionPart, $part1, $part2, $part3, $part4, $part5, $part6, $part7, $part8, $part9, $part10, $part11, $part12);
-return ($coleccionPart);
+return ($coleccion);
 }
-
 
 /**
  * Muestra el historial de la partida
