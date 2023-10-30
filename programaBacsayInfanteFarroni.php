@@ -95,6 +95,28 @@ function preguntaNombre (){
 
     }
 
+    
+/**
+ * verifica que la palabra a ingresar no este en el arreglo de palabra, tenga 5 letras
+ * @param array $coleccionPalabras
+ * @return array
+ */ 
+function nuevaPalabra($coleccionPalabras){
+    $i = 0;
+    $palabra5L = leerPalabra5Letras();
+    $cantPalabras = count($coleccionPalabras);
+    while($i<$cantPalabras && $coleccionPalabras[$i]!= $palabra5L){
+        $i=$i+1;
+    }
+    if($i>=$cantPalabras){
+        $coleccionPalabras[$cantPalabras] = $palabra5L;
+        echo "se agrego la palabra $palabra5L. ";
+    }else{
+        echo "la palabra $palabra5L, ya existe. ";
+    }
+return ($coleccionPalabras);
+}
+   
 
 /**
  * devuelve una palabra aleatoria de la coleccion
@@ -260,6 +282,7 @@ do {
             break;
         case 7:
             echo "7";
+            $coleccionPalabras = nuevaPalabra($coleccionPalabras);
             /**$palabra5L = leerPalabra5Letras();
             $cantPalabras = count($coleccionPalabras);
             while($contador<=$cantPalabras && $palabras5L == 
