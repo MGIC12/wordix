@@ -213,6 +213,7 @@ $opcionMenu = 0;
 $minMenu = 1;
 $maxMenu = 8;
 $coleccionPartidas = cargarColeccionPartidas();
+$coleccionPalabras=cargarColeccionPalabras();
 
 
 //Proceso:
@@ -227,7 +228,6 @@ do {
     switch ($opcionMenu){
         case 1:
             $nombre=preguntaNombre();
-            $coleccionPalabras=cargarColeccionPalabras();
             $palabraSelecc=palabraElegida($coleccionPalabras);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
@@ -235,7 +235,6 @@ do {
         case 2:
             // string $nombre $palabraSelecc, $partida array $coleccionPalabras
             $nombre=preguntaNombre();
-            $coleccionPalabras=cargarColeccionPalabras();
             $palabraSelecc=opcAleatoria($coleccionPalabras);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
