@@ -53,7 +53,7 @@ function logo(){
 /** Muestra el menú para el usuario
  * @param string $player
  */
-function mostrarMenu()
+function seleccionarOpcion()
 {
     //$opcionMenu
     echo "\n";
@@ -114,7 +114,7 @@ function opcAleatoria ($colecPalab){
  * obtiene una coleccion de partidas pasadas
  * @return array $coleccionPart
  */
-function cargarColeccionPartidas(){
+function cargarPartidas(){
     $coleccion = [];
     $coleccion[0] = ["palabraWordix" => "QUESO", "jugador" => "gaspar", "intentos" => 5, "puntaje" => 11];
     $coleccion[1] = ["palabraWordix" => "PIANO", "jugador" => "gaspar", "intentos" => 3, "puntaje" => 13];
@@ -212,7 +212,7 @@ function textoSalir(){
 $opcionMenu = 0;
 $minMenu = 1;
 $maxMenu = 8;
-$coleccionPartidas = cargarColeccionPartidas();
+$coleccionPartidas = cargarPartidas();
 $coleccionPalabras=cargarColeccionPalabras();
 
 
@@ -222,7 +222,7 @@ $coleccionPalabras=cargarColeccionPalabras();
 
 logo();
 do {
-    mostrarMenu();
+    seleccionarOpcion();
     echo "Seleccione opción: \n";
     $opcionMenu = solicitarNumeroEntre($minMenu, $maxMenu);
     switch ($opcionMenu){
@@ -260,6 +260,10 @@ do {
             break;
         case 7:
             echo "7";
+            /**$palabra5L = leerPalabra5Letras();
+            $cantPalabras = count($coleccionPalabras);
+            while($contador<=$cantPalabras && $palabras5L == 
+            $coleccionPalabras[$cantPalabras] = $palabra5L;*/
             break;
         case 8:
             textoSalir();
