@@ -281,12 +281,7 @@ do {
             echo "6";
             break;
         case 7:
-            echo "7";
             $coleccionPalabras = nuevaPalabra($coleccionPalabras);
-            /**$palabra5L = leerPalabra5Letras();
-            $cantPalabras = count($coleccionPalabras);
-            while($contador<=$cantPalabras && $palabras5L == 
-            $coleccionPalabras[$cantPalabras] = $palabra5L;*/
             break;
         case 8:
             textoSalir();
