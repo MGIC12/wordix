@@ -196,6 +196,7 @@ function mostrarHistorial($coleccionHistorial, $numPart){
 function mostrarEstadisticas($jugador, $colecPart){
     $cantPart=0;
     $victorias=0;
+    $puntajeTotal=0;
     $int1=0;
     $int2=0;
     $int3=0;
@@ -354,7 +355,9 @@ do {
 
         case 5:
             $nombre=solicitarJugador();
+            echo "\n******************************************************************\n";
             mostrarEstadisticas($nombre, $coleccionPartidas);
+            echo "\n******************************************************************\n";
             break;
 
         case 6;
