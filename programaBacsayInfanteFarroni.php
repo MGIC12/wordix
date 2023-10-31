@@ -81,9 +81,19 @@ function seleccionarOpcion()
  * Le pregunta al usuario su nombre
  * @return string
  */
-function preguntaNombre (){
-    echo "Ingrese su nombre: ";
-    $usuario=trim(fgets(STDIN));
+function solicitarJugador (){
+$scan=false;
+    do{
+    echo "Ingrese su nombre: \n";
+    $usuario = trim(fgets(STDIN));
+    $startLengthStrg = substr($usuario, 0, 1);
+    if (ctype_alpha($startLengthStrg)){
+        $usuario = strtolower($usuario);
+        $scan = true;
+    }else{
+        echo "El nombre debe comenzar con una letra...";
+    }
+}while ($scan == false);
     return ($usuario);
 }
 
@@ -255,7 +265,7 @@ do {
     $opcionMenu = seleccionarOpcion();
     switch ($opcionMenu){
         case 1:
-            $nombre=preguntaNombre();
+            $nombre=solicitarJugador();
             $palabraSelecc=palabraElegida($coleccionPalabras);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
@@ -263,7 +273,7 @@ do {
 
         case 2:
             // string $nombre $palabraSelecc, $partida array $coleccionPalabras
-            $nombre=preguntaNombre();
+            $nombre=solicitarJugador();
             $palabraSelecc=opcAleatoria($coleccionPalabras);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
