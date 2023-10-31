@@ -187,6 +187,64 @@ function mostrarHistorial($coleccionHistorial, $numPart){
 
 }
 
+
+/**
+ * Realiza varios calculos para devolver las estadisticas del jugador solicitado
+ * @param string $jugador
+ * @param array $colecPart
+ */
+function mostrarEstadisticas($jugador, $colecPart){
+    $cantPart=0;
+    $victorias=0;
+    $int1=0;
+    $int2=0;
+    $int3=0;
+    $int4=0;
+    $int5=0;
+    $int6=0;
+    foreach ($colecPart as $indice => $elemento){
+        if ($colecPart[$indice]["jugador"]==$jugador){
+            $cantPart++;
+            $puntajeTotal=$puntajeTotal+$colecPart[$indice]["puntaje"];
+            if ($colecPart[$indice]["intentos"]>0 && $colecPart[$indice]["intentos"]<=6){
+                $victorias++;
+            }
+            if ($colecPart[$indice]["intentos"]==1){
+                $int1++;
+            }elseif ($colecPart[$indice]["intentos"]==2){
+                $int2++;
+            }elseif ($colecPart[$indice]["intentos"]==3){
+                $int3++;
+            }elseif ($colecPart[$indice]["intentos"]==4){
+                $int4++;
+            }elseif ($colecPart[$indice]["intentos"]==5){
+                $int5++;
+            }elseif ($colecPart[$indice]["intentos"]==6){
+                $int6++;
+            }
+        }
+    }
+    if ($cantPart > 0){
+        $porcentaje=$victorias*100/$cantPart;
+        echo "\nJugador: ".$jugador;
+       echo "\nPartidas: ".$cantPart;
+      echo "\nPuntaje Total: ".$puntajeTotal;
+       echo "\nVictorias: ".$victorias;
+       echo "\nPorcentaje de victorias: ".$porcentaje."%";
+       echo "\nAdivinadas: ";
+       echo "\n      Intento 1: ".$int1;
+       echo "\n      Intento 1: ".$int2;
+       echo "\n      Intento 1: ".$int3;
+       echo "\n      Intento 1: ".$int4;
+       echo "\n      Intento 1: ".$int5;
+       echo "\n      Intento 1: ".$int6;
+    }else{
+        echo "\neste jugador no se encuentra en la base de datos";
+    }
+    
+}
+
+
 /** Determina el indice Minimo de un array
  * @param int $max
  * @return int
@@ -295,7 +353,8 @@ do {
             break;
 
         case 5:
-            echo "5";
+            $nombre=solicitarJugador();
+            mostrarEstadisticas($nombre, $coleccionPartidas);
             break;
 
         case 6;
