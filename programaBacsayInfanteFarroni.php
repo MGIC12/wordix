@@ -151,7 +151,7 @@ function opcAleatoria ($colecPalab){
 
 /**
  * obtiene una coleccion de partidas pasadas
- * @return array $coleccionPart
+ * @return array
  */
 function cargarPartidas(){
     $coleccion = [];
@@ -170,6 +170,24 @@ function cargarPartidas(){
 
 return ($coleccion);
 }
+
+
+/**
+ * obtiene una estructura asociatica de las estadisticas de los jugadores
+ * @return array
+ */
+function cargarEstadisticas(){
+    $estadisticas = [];
+    $estadisticas=[0] = ["jugador" => "gaspar", "partidas" => 5, "puntaje" => 53, "victorias" => 4, "intento1" => 1, "intento2" => 0, "intento3" => 1, "intento4" => 1, "intento5" => 1, "intento6" => 0];
+    $estadisticas=[1] = ["jugador" => "julian", "partidas" => 3, "puntaje" => 27, "victorias" => 2, "intento1" => 0, "intento2" => 1, "intento3" => 1, "intento4" => 0, "intento5" => 0, "intento6" => 0];
+    $estadisticas=[2] = ["jugador" => "facu", "partidas" => 2, "puntaje" => 21, "victorias" => 2, "intento1" => 0, "intento2" => 0, "intento3" => 0, "intento4" => 1, "intento5" => 0, "intento6" => 1];
+    $estadisticas=[3] = ["jugador" => "marcos", "partidas" => 2, "puntaje" => 27, "victorias" => 2, "intento1" => 0, "intento2" => 0, "intento3" => 1, "intento4" => 0, "intento5" => 1, "intento6" => 0];
+
+return ($estadisticas);
+}    
+
+
+
 
 /**
  * Muestra el historial de la partida
@@ -234,11 +252,11 @@ function mostrarEstadisticas($jugador, $colecPart){
        echo "\nPorcentaje de victorias: ".$porcentaje."%";
        echo "\nAdivinadas: ";
        echo "\n      Intento 1: ".$int1;
-       echo "\n      Intento 1: ".$int2;
-       echo "\n      Intento 1: ".$int3;
-       echo "\n      Intento 1: ".$int4;
-       echo "\n      Intento 1: ".$int5;
-       echo "\n      Intento 1: ".$int6;
+       echo "\n      Intento 2: ".$int2;
+       echo "\n      Intento 3: ".$int3;
+       echo "\n      Intento 4: ".$int4;
+       echo "\n      Intento 5: ".$int5;
+       echo "\n      Intento 6: ".$int6;
     }else{
         echo "\neste jugador no se encuentra en la base de datos";
     }
@@ -312,6 +330,7 @@ $minMenu = 1;
 $maxMenu = 8;
 $coleccionPartidas = cargarPartidas();
 $coleccionPalabras=cargarColeccionPalabras();
+$coleccionEstadisticas=cargarEstadisticas();
 
 
 //Proceso:
