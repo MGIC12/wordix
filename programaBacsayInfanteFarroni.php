@@ -106,11 +106,11 @@ function preguntaNombre (){
 /**
  * verifica que la palabra a ingresar no este en el arreglo de palabra, tenga 5 letras
  * @param array $coleccionPalabras
+ * @param string $palabra5L
  * @return array
  */ 
-function nuevaPalabra($coleccionPalabras){
+function nuevaPalabra($coleccionPalabras, $palabra5L){
     $i = 0;
-    $palabra5L = leerPalabra5Letras();
     $cantPalabras = count($coleccionPalabras);
     while($i<$cantPalabras && $coleccionPalabras[$i]!= $palabra5L){
         $i=$i+1;
@@ -293,7 +293,8 @@ do {
             break;
 
         case 7:
-            $coleccionPalabras = nuevaPalabra($coleccionPalabras);
+            $palabra5L = leerPalabra5Letras();
+            $coleccionPalabras = nuevaPalabra($coleccionPalabras, $nuevaPalabra);
             break;
 
         case 8:
