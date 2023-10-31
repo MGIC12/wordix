@@ -55,6 +55,8 @@ function logo(){
  */
 function seleccionarOpcion()
 {
+    $minMenu = 1;
+    $maxMenu = 8;
     //$opcionMenu
     echo "\n";
     echo "******************************************************************\n";
@@ -67,6 +69,11 @@ function seleccionarOpcion()
     echo "7) Agregar una palabra de 5 letras                                \n";
     echo "8) Salir                                                          \n";
     echo "******************************************************************\n";
+
+    echo "Seleccione opción: \n";
+    $opcion = solicitarNumeroEntre($minMenu, $maxMenu);
+
+    return $opcion;
 }
 
 
@@ -244,9 +251,8 @@ $coleccionPalabras=cargarColeccionPalabras();
 
 logo();
 do {
-    seleccionarOpcion();
-    echo "Seleccione opción: \n";
-    $opcionMenu = solicitarNumeroEntre($minMenu, $maxMenu);
+    
+    $opcionMenu = seleccionarOpcion();
     switch ($opcionMenu){
         case 1:
             $nombre=preguntaNombre();
@@ -254,6 +260,7 @@ do {
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
             break;
+
         case 2:
             // string $nombre $palabraSelecc, $partida array $coleccionPalabras
             $nombre=preguntaNombre();
@@ -261,6 +268,7 @@ do {
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
             break;
+
         case 3:
             $maxArray = indiceMax($coleccionPartidas)+1;
             $minArray = indiceMin($maxArray);
@@ -271,18 +279,23 @@ do {
                 mostrarHistorial($coleccionPartidas, $numPartida);
                 echo "\n******************************************************************\n";
             break;
+
         case 4:
             echo "4";
             break;
+
         case 5:
             echo "5";
             break;
+
         case 6;
             echo "6";
             break;
+
         case 7:
             $coleccionPalabras = nuevaPalabra($coleccionPalabras);
             break;
+
         case 8:
             textoSalir();
             break;
