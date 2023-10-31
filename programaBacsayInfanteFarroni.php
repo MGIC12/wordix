@@ -109,7 +109,7 @@ function preguntaNombre (){
  * @param string $palabra5L
  * @return array
  */ 
-function nuevaPalabra($coleccionPalabras, $palabra5L){
+function agregarPalabra($coleccionPalabras, $palabra5L){
     $i = 0;
     $cantPalabras = count($coleccionPalabras);
     while($i<$cantPalabras && $coleccionPalabras[$i]!= $palabra5L){
@@ -294,7 +294,7 @@ do {
 
         case 7:
             $palabra5L = leerPalabra5Letras();
-            $coleccionPalabras = nuevaPalabra($coleccionPalabras, $nuevaPalabra);
+            $coleccionPalabras = agregarPalabra($coleccionPalabras, $palabra5L);
             break;
 
         case 8:
