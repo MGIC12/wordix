@@ -86,9 +86,9 @@ $scan=false;
     do{
     echo "Ingrese su nombre: \n";
     $usuario = trim(fgets(STDIN));
-    $startLengthStrg = substr($usuario, 0, 1);
-    if (ctype_alpha($startLengthStrg)){
-        $usuario = strtolower($usuario);
+    $startLengthStrg = substr($usuario, 0, 1); //substr se utiliza para devolver parte de una cadena de un punto de inicio a uno final.
+    if (ctype_alpha($startLengthStrg)){ //ctype_alpha se utiliza para chequear caracteres alfabéticos.
+        $usuario = strtolower($usuario); //strtolower se lo utiliza para convertir el string en minúsculas.
         $scan = true;
     }else{
         echo "El nombre debe comenzar con una letra...";
