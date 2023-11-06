@@ -340,15 +340,51 @@ function esIntentoGanado($estructuraPalabraIntento)
 }
 
 /**
- * ****COMPLETAR***** documentación de la intefaz
+ * devuelve el puntaje del intento ganador
+ * @param int $intentos
+ * @param string $palabra
+ * @return int
  */
-function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */
-{
+function obtenerPuntajeWordix($intentos, $palabra){
+/**int $puntIntentos, $puntLetra, $i array $char */
+    switch($intentos){
+        case 1:
+            $puntIntentos=6;
+            break;
+        case 2:
+            $puntIntentos=5;
+            break;
+        case 3:
+            $puntIntentos=4;
+            break;
+        case 4:
+            $puntIntentos=3;
+            break;
+        case 5:
+            $puntIntentos=2;
+            break;
+        case 6:
+            $puntIntentos=1;
+            break;
 
-    /* ****COMPLETAR***** cuerpo de la función*/
-    return 0;
+    }
+
+    $char=str_split($palabra);
+    $puntLetra=0;
+    for($i=1;$i<=5;$i++){
+        if($char[$i]=="A"||$char[$i]=="E"||$char[$i]=="I"||$char[$i]=="O"||$char[$i]=="U"){
+            $puntLetra=$puntLetra+1;
+        }
+        elseif($char[$i]<="M"){
+            $puntLetra=$puntLetra+2;
+        }
+        else{
+            $puntLetra=$puntLetra+3;
+        }
+    }
+    
+    return ($puntIntentos+$puntLetra);
 }
-
 
 
 /**
