@@ -371,7 +371,7 @@ function obtenerPuntajeWordix($intentos, $palabra){
 
     $char=str_split($palabra);
     $puntLetra=0;
-    for($i=1;$i<=5;$i++){
+    for($i=0;$i<5;$i++){
         if($char[$i]=="A"||$char[$i]=="E"||$char[$i]=="I"||$char[$i]=="O"||$char[$i]=="U"){
             $puntLetra=$puntLetra+1;
         }
@@ -419,7 +419,7 @@ function jugarWordix($palabraWordix, $nombreUsuario)
 
     if ($ganoElIntento) {
         $nroIntento--;
-        $puntaje = obtenerPuntajeWordix();
+        $puntaje = obtenerPuntajeWordix($nroIntento, $palabraIntento);
         echo "Adivinó la palabra Wordix en el intento " . $nroIntento . "!: " . $palabraIntento . " Obtuvo $puntaje puntos!";
     } else {
         $nroIntento = 0; //reset intento
