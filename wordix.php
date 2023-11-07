@@ -347,27 +347,8 @@ function esIntentoGanado($estructuraPalabraIntento)
  */
 function obtenerPuntajeWordix($intentos, $palabra){
 /**int $puntIntentos, $puntLetra, $i array $char */
-    switch($intentos){
-        case 1:
-            $puntIntentos=6;
-            break;
-        case 2:
-            $puntIntentos=5;
-            break;
-        case 3:
-            $puntIntentos=4;
-            break;
-        case 4:
-            $puntIntentos=3;
-            break;
-        case 5:
-            $puntIntentos=2;
-            break;
-        case 6:
-            $puntIntentos=1;
-            break;
-
-    }
+    
+    $puntIntentos=7-$intentos;
 
     $char=str_split($palabra);
     $puntLetra=0;
