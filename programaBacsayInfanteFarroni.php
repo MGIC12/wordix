@@ -97,6 +97,32 @@ $scan=false;
     return ($usuario);
 }
 
+
+function palabraRepetida($nombre, $palabra, $historial){
+
+        $i=0;
+        $cant=count($historial);
+        $seguir=0;
+
+        do{
+            if($historial[$i]["palabraWordix"]==$palabra && $historial[$i]["jugador"]==$nombre){
+                $seguir=1;
+            }else{
+                $i=$i+1;
+            }
+
+        }while($i<$cant&&$seguir==0);
+
+        if($seguir==0){
+            $igual=false;
+        }else{
+            $igual=true;
+        }
+
+        return $igual;
+    }
+
+
 /**
      * Devuelve una palabra del listado a partir de un numero
      * @param array $coleccion
