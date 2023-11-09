@@ -97,8 +97,14 @@ $scan=false;
     return ($usuario);
 }
 
-
+/**
+ * verifica si la palabra elegida ya fue utilizada por el gugador en el historial
+ * @param string $nombre, $palabra
+ * @param array $historial
+ * @return boolean
+ * */ 
 function palabraRepetida($nombre, $palabra, $historial){
+    // boolean $igual int $i, $cant, $seguir
 
         $i=0;
         $cant=count($historial);
