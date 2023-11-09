@@ -131,14 +131,21 @@ function palabraRepetida($nombre, $palabra, $historial){
 
 /**
      * Devuelve una palabra del listado a partir de un numero
-     * @param array $coleccion
+     * @param array $coleccion, $nombre, $historial
      * @return string 
      */
-    function palabraElegida ($coleccion){
+    function palabraElegida ($coleccion, $nombre, $historial){
         $max=count($coleccion);
         echo "Ingrese el numero de la palabra: ";
         $numPalabra=solicitarNumeroEntre(1, $max)-1;
-           $palabraEleg=$coleccion[$numPalabra];
+        $palabraEleg=$coleccion[$numPalabra];
+        $esIgual=palabraRepetida($nombre, $palabraEleg, $historial);
+        while($esIgual){
+            echo "Ingrese otro numero: ";
+            $numPalabra=solicitarNumeroEntre(1, $max)-1;
+            $palabraEleg=$coleccion[$numPalabra];
+            $esIgual=palabraRepetida($nombre, $palabraEleg, $historial);
+        }
         
     return $palabraEleg;
 
@@ -169,14 +176,21 @@ return ($coleccionPalabras);
 
 /**
  * devuelve una palabra aleatoria de la coleccion
- * @param array $colecPalab
+ * @param array $colecPalab, $nombre, $historial
  * @return string
  */
-function opcAleatoria ($colecPalab){
+function opcAleatoria ($colecPalab, $nombre, $historial){
     // int $max, $numAleatorio, string $palab
     $max=count($colecPalab);
     $numAleatorio=rand(0,$max-1);
     $palab=$colecPalab[$numAleatorio];
+    $esIgual=palabraRepetida($nombre, $palab, $historial);
+        while($esIgual){
+            $numAleatorio=rand(0,$max-1);
+            $palab=$colecPalab[$numAleatorio];
+            $esIgual=palabraRepetida($nombre, $palab, $historial);
+        }
+
     return ($palab);
 }
 
@@ -376,7 +390,7 @@ do {
     switch ($opcionMenu){
         case 1:
             $nombre=solicitarJugador();
-            $palabraSelecc=palabraElegida($coleccionPalabras);
+            $palabraSelecc=palabraElegida($coleccionPalabras, $nombre, $coleccionPartidas);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
             break;
@@ -384,7 +398,7 @@ do {
         case 2:
             // string $nombre $palabraSelecc, $partida array $coleccionPalabras
             $nombre=solicitarJugador();
-            $palabraSelecc=opcAleatoria($coleccionPalabras);
+            $palabraSelecc=opcAleatoria($coleccionPalabras, $nombre, $coleccionPartidas);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
             break;
