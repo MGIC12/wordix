@@ -310,6 +310,31 @@ function mostrarEstadisticas($jugador, $colecPart){
 }
 
 
+/**
+ * Compara los strings y determina cuál es mayor y cuál es menor
+ * @param string $str1, $str2
+ * @return int
+ */
+function comparadorString($str1, $str2){
+    $resultado = strcmp($str1["jugador"], $str2["jugador"]);
+
+    if ($resultado == 0){
+        $resultado = strcmp($str1["palabraWordix"], $str2["palabraWordix"]);
+    }
+return ($resultado);
+}
+
+
+/**
+ * Ordena alfabéticamente los strings ingresados
+ * @param array $coleccionHistorial
+ */
+function ordenarAlfab($coleccionHistorial){
+    uasort($coleccionHistorial, 'comparadorString'); //Ejecutada la función así ('comparadorString') debido a que son strings de un array pedido en esta función
+    print_r($coleccionHistorial);
+}
+
+
 /** Determina el indice Minimo de un array
  * @param int $max
  * @return int
@@ -378,7 +403,6 @@ $coleccionPartidas = cargarPartidas();
 $coleccionPalabras=cargarColeccionPalabras();
 $coleccionEstadisticas=cargarEstadisticas();
 
-
 //Proceso:
 
 
@@ -426,7 +450,10 @@ do {
             break;
 
         case 6;
-            echo "6";
+            echo "\n******************************************************************\n";
+            echo "Este es el listado de partidas jugadas...\n\n";
+            $listadoPartidasOrdenada = ordenarAlfab($coleccionPartidas);
+            echo "\n******************************************************************\n";
             break;
 
         case 7:
