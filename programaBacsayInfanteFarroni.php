@@ -235,6 +235,37 @@ return ($estadisticas);
 
 
 
+
+/**
+ * muestra los datos de la primera partida ganada del jugador
+ * @param string $usuario
+ * @param array $historial
+ */
+function primPartGan ($usuario, $historial){
+    $gan=0;
+    $cantPart=0;
+    $aux=0;
+    foreach ($historial as $indice => $elemento){
+        if ($historial[$indice]["jugador"]==$usuario){
+            $cantPart++;
+            if ($historial[$indice]["intentos"]>0 && $aux==0){
+                echo "Partida Wordix ".$cantPart.": palabra ".$historial[$indice]["palabraWordix"];
+                echo "\nJugador :".$usuario;
+                echo "\nPuntaje :".$historial[$indice]["puntaje"]." puntos";
+                echo "\nIntento : Adivino la palabra en ".$historial[$indice]["intentos"]." intentos";
+                $aux= 1;
+                $gan++;
+            }
+        }
+    }
+    if ($cantPart == 0 || $gan == 0){
+        echo "El jugador ".$usuario." no gano ninguna partida";
+    }
+}
+
+
+
+
 /**
  * Muestra el historial de la partida
  * @param array $coleccionHistorial
@@ -439,7 +470,10 @@ do {
             break;
 
         case 4:
-            echo "4";
+            $nombre=solicitarJugador();
+	            echo "\n******************************************************************\n";
+	            primPartGan($nombre, $coleccionPartidas);
+	            echo "\n******************************************************************\n";
             break;
 
         case 5:
