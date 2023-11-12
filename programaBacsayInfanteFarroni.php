@@ -237,30 +237,25 @@ return ($estadisticas);
 
 
 /**
- * muestra los datos de la primera partida ganada del jugador
- * @param string $usuario
+ * devuelve el indice de la primera partida ganada por el jugador ingresado
  * @param array $historial
+ * @param string $usuario
+ * @return int
  */
-function primPartGan ($usuario, $historial){
-    $gan=0;
-    $cantPart=0;
+function primPartGan ($historial, $usuario){
     $aux=0;
-    foreach ($historial as $indice => $elemento){
-        if ($historial[$indice]["jugador"]==$usuario){
-            $cantPart++;
-            if ($historial[$indice]["intentos"]>0 && $aux==0){
-                echo "Partida Wordix ".$cantPart.": palabra ".$historial[$indice]["palabraWordix"];
-                echo "\nJugador :".$usuario;
-                echo "\nPuntaje :".$historial[$indice]["puntaje"]." puntos";
-                echo "\nIntento : Adivino la palabra en ".$historial[$indice]["intentos"]." intentos";
-                $aux= 1;
-                $gan++;
+    foreach ($historial as $ind => $elemento){
+        if ($historial[$ind]["jugador"]==$usuario){
+            if ($historial[$ind]["puntaje"]>0 && $aux==0){
+                $indice = $ind;
+                $aux=1;
             }
         }
     }
-    if ($cantPart == 0 || $gan == 0){
-        echo "El jugador ".$usuario." no gano ninguna partida";
+    if ($aux == 0){
+        $indice = -1;
     }
+    return ($indice);
 }
 
 
@@ -594,8 +589,16 @@ do {
 
         case 4:
             $nombre=solicitarJugador();
+	        $indice=primPartGan($coleccionPartidas, $nombre);
 	            echo "\n******************************************************************\n";
-	            primPartGan($nombre, $coleccionPartidas);
+	            if ($indice>-1){
+                    echo "\nPartida Wordix ".($indice+1).": palabra ".$coleccionPartidas[$indice]["palabraWordix"];
+                    echo "\nJugador: ".$coleccionPartidas[$indice]["jugador"];
+                    echo "\nPuntaje: ".$coleccionPartidas[$indice]["puntaje"];
+                    echo "\nIntento: Adivino la palabra en ".$coleccionPartidas[$indice]["intentos"]." intentos";
+                }else{
+                    echo "\nEl jugador ".$nombre." no ganó ninguna partida";
+                }
 	            echo "\n******************************************************************\n";
             break;
 
