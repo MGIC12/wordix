@@ -284,60 +284,123 @@ function mostrarHistorial($coleccionHistorial, $numPart){
 
 
 /**
- * Realiza varios calculos para devolver las estadisticas del jugador solicitado
+ * Le muestra sus estadisticas al jugador
  * @param string $jugador
- * @param array $colecPart
+ * @param array $stats
  */
-function mostrarEstadisticas($jugador, $colecPart){
-    $cantPart=0;
-    $victorias=0;
-    $puntajeTotal=0;
-    $int1=0;
-    $int2=0;
-    $int3=0;
-    $int4=0;
-    $int5=0;
-    $int6=0;
-    foreach ($colecPart as $indice => $elemento){
-        if ($colecPart[$indice]["jugador"]==$jugador){
-            $cantPart++;
-            $puntajeTotal=$puntajeTotal+$colecPart[$indice]["puntaje"];
-            if ($colecPart[$indice]["intentos"]>0 && $colecPart[$indice]["intentos"]<=6){
-                $victorias++;
-            }
-            if ($colecPart[$indice]["intentos"]==1){
-                $int1++;
-            }elseif ($colecPart[$indice]["intentos"]==2){
-                $int2++;
-            }elseif ($colecPart[$indice]["intentos"]==3){
-                $int3++;
-            }elseif ($colecPart[$indice]["intentos"]==4){
-                $int4++;
-            }elseif ($colecPart[$indice]["intentos"]==5){
-                $int5++;
-            }elseif ($colecPart[$indice]["intentos"]==6){
-                $int6++;
-            }
-        }
+function mostrarEstadisticas($jugador, $stats){
+    $n=count($stats);
+    $i=0;
+    while ($i<$n && $stats[$i]["jugador"]!=$jugador){
+        $i++;
     }
-    if ($cantPart > 0){
-        $porcentaje=$victorias*100/$cantPart;
+    if ($i<$n){
+        $porcentaje=$stats[$i]["victorias"]*100/$stats[$i]["partidas"];
         echo "\nJugador: ".$jugador;
-       echo "\nPartidas: ".$cantPart;
-      echo "\nPuntaje Total: ".$puntajeTotal;
-       echo "\nVictorias: ".$victorias;
-       echo "\nPorcentaje de victorias: ".$porcentaje."%";
-       echo "\nAdivinadas: ";
-       echo "\n      Intento 1: ".$int1;
-       echo "\n      Intento 2: ".$int2;
-       echo "\n      Intento 3: ".$int3;
-       echo "\n      Intento 4: ".$int4;
-       echo "\n      Intento 5: ".$int5;
-       echo "\n      Intento 6: ".$int6;
+        echo "\nPartidas: ".$stats[$i]["partidas"];
+        echo "\nPuntaje Total: ".$stats[$i]["puntaje"];
+        echo "\nVictorias: ".$stats[$i]["victorias"];
+        echo "\nPorcentaje de victorias: ".$porcentaje."%";
+        echo "\nAdivinadas: ";
+        echo "\n      Intento 1: ".$stats[$i]["intento1"];
+        echo "\n      Intento 2: ".$stats[$i]["intento2"];
+        echo "\n      Intento 3: ".$stats[$i]["intento3"];
+        echo "\n      Intento 4: ".$stats[$i]["intento4"];
+        echo "\n      Intento 5: ".$stats[$i]["intento5"];
+        echo "\n      Intento 6: ".$stats[$i]["intento6"];
     }else{
-        echo "\neste jugador no se encuentra en la base de datos";
+        echo "el jugador no tiene estadisticas";
     }
-    
+}
+
+
+/**
+ * Verifica si un usuario ya se encuentra en los datos de estadisticas
+ * @param string $usuario
+ * @param array $coleccionStats
+ */
+function buscarNombre ($usuario, $coleccionStats){
+    $n=count($coleccionStats);
+    $i=0;
+    $jugExis=false;
+    while ($i<$n && $coleccionStats[$i]["jugador"]!=$usuario){
+        $i++;
+    }
+    if ($i<$n){
+        $jugExis=true;
+    }
+    return ($jugExis);
+}
+
+
+/**
+ * identifica en que columna se encuentra el jugador solicitado
+ * @param string $usuario
+ * @param array $arreg
+ * @return int
+ */
+function buscarColumna ($usuario, $arreg){
+    $i=0;
+    $n=count($arreg);
+    while($i<$n && $arreg[$i]["jugador"]!=$usuario){
+        $i++;
+    }
+    return ($i);
+}
+
+
+/**
+ * carga estadisticas y si el jugador ya existe suma las estadisticas
+ * @param string $usuario
+ * @param array $stats
+ * @param array $part
+ */
+function cargaEstads ($usuario, $stats, $part){
+    /* */
+    if ($part["puntaje"]>0){ 
+        $victoria=1;
+    }else{
+        $victoria= 0;
+    }
+    $int1= 0;
+    $int2= 0;
+    $int3= 0;
+    $int4= 0;
+    $int5= 0;
+    $int6= 0;
+    $intento=$part["intentos"]; 
+    switch ($intento){
+        case 1:
+            $int1= 1;
+            break;
+        case 2:
+            $int2= 1;
+            break;
+        case 3:
+            $int3= 1;
+            break;
+        case 4:
+            $int4= 1;
+            break;
+        case 5:
+            $int5= 1;
+            break;
+        case 6:
+            $int6= 1;
+            break;
+    }
+    $datosStats =[
+        "jugador" => $usuario,
+        "puntaje" => $part["puntaje"],
+        "victorias" => $victoria,
+        "intento1"=> $int1,
+        "intento2"=> $int2,
+        "intento3"=> $int3,
+        "intento4"=> $int4,
+        "intento5"=> $int5,
+        "intento6"=> $int6,
+    ];
+    return ($datosStats);
 }
 
 
@@ -448,6 +511,36 @@ do {
             $palabraSelecc=palabraElegida($coleccionPalabras, $nombre, $coleccionPartidas);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
+            $existe=buscarNombre($nombre, $coleccionEstadisticas);
+            $datosEstads=cargaEstads($nombre, $coleccionEstadisticas, $partida);
+            if ($existe == true){
+                $col=buscarColumna($nombre, $coleccionEstadisticas);
+                $coleccionEstadisticas[$col]=[
+                    "jugador" => $datosEstads["jugador"],
+                    "partidas" => $coleccionEstadisticas[$col]["partidas"]+1,
+                    "puntaje" => $coleccionEstadisticas[$col]["puntaje"]+$datosEstads["puntaje"],
+                    "victorias" => $coleccionEstadisticas[$col]["victorias"]+$datosEstads["victorias"],
+                    "intento1" => $coleccionEstadisticas[$col]["intento1"]+$datosEstads["intento1"],
+                    "intento2" => $coleccionEstadisticas[$col]["intento2"]+$datosEstads["intento2"],
+                    "intento3" => $coleccionEstadisticas[$col]["intento3"]+$datosEstads["intento3"],
+                    "intento4" => $coleccionEstadisticas[$col]["intento4"]+$datosEstads["intento4"],
+                    "intento5" => $coleccionEstadisticas[$col]["intento5"]+$datosEstads["intento5"],
+                    "intento6" => $coleccionEstadisticas[$col]["intento6"]+$datosEstads["intento6"],
+                ];
+            }else{
+                $coleccionEstadisticas[]=[
+                    "jugador" => $datosEstads["jugador"],
+                    "partidas" => 1,
+                    "puntaje" => $datosEstads["puntaje"],
+                    "victorias" => $datosEstads["victorias"],
+                    "intento1" => $datosEstads["intento1"],
+                    "intento2" => $datosEstads["intento2"],
+                    "intento3" => $datosEstads["intento3"],
+                    "intento4" => $datosEstads["intento4"],
+                    "intento5" => $datosEstads["intento5"],
+                    "intento6" => $datosEstads["intento6"],
+                ];
+            }
             break;
 
         case 2:
@@ -456,6 +549,36 @@ do {
             $palabraSelecc=opcAleatoria($coleccionPalabras, $nombre, $coleccionPartidas);
             $partida=jugarWordix($palabraSelecc, strtolower($nombre));
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
+            $existe=buscarNombre($nombre, $coleccionEstadisticas);
+            $datosEstads=cargaEstads($nombre, $coleccionEstadisticas, $partida);
+            if ($existe == true){
+                $col=buscarColumna($nombre, $coleccionEstadisticas);
+                $coleccionEstadisticas[$col]=[
+                    "jugador" => $datosEstads["jugador"],
+                    "partidas" => $coleccionEstadisticas[$col]["partidas"]+1,
+                    "puntaje" => $coleccionEstadisticas[$col]["puntaje"]+$datosEstads["puntaje"],
+                    "victorias" => $coleccionEstadisticas[$col]["victorias"]+$datosEstads["victorias"],
+                    "intento1" => $coleccionEstadisticas[$col]["intento1"]+$datosEstads["intento1"],
+                    "intento2" => $coleccionEstadisticas[$col]["intento2"]+$datosEstads["intento2"],
+                    "intento3" => $coleccionEstadisticas[$col]["intento3"]+$datosEstads["intento3"],
+                    "intento4" => $coleccionEstadisticas[$col]["intento4"]+$datosEstads["intento4"],
+                    "intento5" => $coleccionEstadisticas[$col]["intento5"]+$datosEstads["intento5"],
+                    "intento6" => $coleccionEstadisticas[$col]["intento6"]+$datosEstads["intento6"],
+                ];
+            }else{
+                $coleccionEstadisticas[]=[
+                    "jugador" => $datosEstads["jugador"],
+                    "partidas" => 1,
+                    "puntaje" => $datosEstads["puntaje"],
+                    "victorias" => $datosEstads["victorias"],
+                    "intento1" => $datosEstads["intento1"],
+                    "intento2" => $datosEstads["intento2"],
+                    "intento3" => $datosEstads["intento3"],
+                    "intento4" => $datosEstads["intento4"],
+                    "intento5" => $datosEstads["intento5"],
+                    "intento6" => $datosEstads["intento6"],
+                ];
+            }
             break;
 
         case 3:
@@ -479,7 +602,7 @@ do {
         case 5:
             $nombre=solicitarJugador();
             echo "\n******************************************************************\n";
-            mostrarEstadisticas($nombre, $coleccionPartidas);
+            mostrarEstadisticas($nombre, $coleccionEstadisticas);
             echo "\n******************************************************************\n";
             break;
 
