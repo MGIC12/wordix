@@ -321,7 +321,7 @@ do {
         case 1:
             $nombre=solicitarJugador();
             $palabraSelecc=palabraElegida($coleccionPalabras, $nombre, $coleccionPartidas);
-            $partida=jugarWordix($palabraSelecc, strtolower($nombre));
+            $partida=jugarWordix($palabraSelecc, $nombre);
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
             break;
 
@@ -329,13 +329,13 @@ do {
             // string $nombre $palabraSelecc, $partida array $coleccionPalabras
             $nombre=solicitarJugador();
             $palabraSelecc=opcAleatoria($coleccionPalabras, $nombre, $coleccionPartidas);
-            $partida=jugarWordix($palabraSelecc, strtolower($nombre));
+            $partida=jugarWordix($palabraSelecc, $nombre);
             $coleccionPartidas[]=["palabraWordix" => $partida["palabraWordix"], "jugador" => $partida["jugador"], "intentos" => $partida["intentos"], "puntaje" => $partida["puntaje"]];
             break;
 
         case 3:
-            $maxArray = indiceMax($coleccionPartidas)+1;
-            $minArray = indiceMin($maxArray);
+            $maxArray = count($coleccionPartidas);
+            $minArray = 0;
             echo "Seleccione una partida entre la partida N° ".($minArray +1)." y la N° ".($maxArray)."\n";
             $numPartida = solicitarNumeroEntre(1, $maxArray);
             $numPartida = $numPartida - 1;
@@ -484,15 +484,6 @@ function opcAleatoria ($colecPalab, $nombre, $historial){
 }
 
 
-/** Determina el indice Minimo de un array
- * @param int $max
- * @return int
- */
-function indiceMin($max){
-    //int $indMin
-    $indMin = $max - $max;
-    return $indMin;
-}
 
 /** Determina el indice maximo de un array
  * @param array $coleccionPalabras
