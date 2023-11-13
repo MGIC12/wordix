@@ -26,7 +26,7 @@ include_once("wordix.php");
  * @return array
  */
 function cargarColeccionPalabras()
-{
+{//array $coleccionPalabras
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
@@ -44,6 +44,7 @@ function cargarColeccionPalabras()
  * @return array
  */
 function cargarPartidas(){
+    //array $coleccion
     $coleccion = [];
     $coleccion[0] = ["palabraWordix" => "QUESO", "jugador" => "gaspar", "intentos" => 5, "puntaje" => 11];
     $coleccion[1] = ["palabraWordix" => "PIANO", "jugador" => "gaspar", "intentos" => 3, "puntaje" => 13];
@@ -67,7 +68,7 @@ return ($coleccion);
  * @param string $player
  */
 function seleccionarOpcion()
-{
+{//int $minMenu, $maxMenu, $opcion
     $minMenu = 1;
     $maxMenu = 8;
     //$opcionMenu
@@ -105,6 +106,7 @@ function seleccionarOpcion()
  * @param int $numPart
  */
 function mostrarHistorial($coleccionHistorial, $numPart){
+    //array $partida
     $partida = $coleccionHistorial[$numPart];
     if ($partida["intentos"]>0){
         echo "Partida WORDIX ".($numPart+1).": palabra ". $partida["palabraWordix"] . "\n" . "Jugador: " . $partida["jugador"] . "\n" . "Puntaje: " . $partida["puntaje"] . " puntos\n" . "Intento: Adivinó la palabra en " . $partida["intentos"] . " intentos";
@@ -124,6 +126,7 @@ function mostrarHistorial($coleccionHistorial, $numPart){
  * @return array
  */ 
 function agregarPalabra($coleccionPalabras, $palabra5L){
+    // int $i, $cantPalabras array $coleccionPalabras
     $i = 0;
     $cantPalabras = count($coleccionPalabras);
     while($i<$cantPalabras && $coleccionPalabras[$i]!= $palabra5L){
@@ -147,6 +150,11 @@ return ($coleccionPalabras);
  * @return int
  */
 function primPartGan ($historial, $usuario){
+    //int $aux, $indice, 
+    
+    //**COMPLETAR**
+
+
     $aux=0;
     foreach ($historial as $ind => $elemento){
         if ($historial[$ind]["jugador"]==$usuario){
