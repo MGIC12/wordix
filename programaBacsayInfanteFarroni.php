@@ -196,7 +196,7 @@ function resumenStats ($partidas, $usuario){
                 $victorias++;
             }
             $int=$partidas[$indice]["intentos"];
-            switch($int){
+            switch($int){           // switch: hace referencia a las estructuras de control if...elseif
                 case 1:
                     $int1++;
                     break;
