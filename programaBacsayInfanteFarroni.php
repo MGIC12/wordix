@@ -25,8 +25,8 @@ include_once("wordix.php");
  * Obtiene una colección de palabras
  * @return array
  */
-function cargarColeccionPalabras()
-{//array $coleccionPalabras
+function cargarColeccionPalabras(){
+    //array $coleccionPalabras
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
@@ -67,11 +67,10 @@ return ($coleccion);
 /** Muestra el menú para el usuario
  * @return int
  */
-function seleccionarOpcion()
-{//int $minMenu, $maxMenu, $opcion
+function seleccionarOpcion(){
+    //int $minMenu, $maxMenu, $opcion
     $minMenu = 1;
     $maxMenu = 8;
-    //$opcionMenu
     echo "\n";
     echo "******************************************************************\n";
     echo "1) Jugar Wordix con una palabra elegida                           \n";
@@ -126,7 +125,8 @@ function mostrarHistorial($coleccionHistorial, $numPart){
  * @return array
  */ 
 function agregarPalabra($coleccionPalabras, $palabra5L){
-    // int $i, $cantPalabras array $coleccionPalabras
+    // int $i, $cantPalabras 
+    // array $coleccionPalabras
     $i = 0;
     $cantPalabras = count($coleccionPalabras);
     while($i<$cantPalabras && $coleccionPalabras[$i]!= $palabra5L){
@@ -151,9 +151,6 @@ return ($coleccionPalabras);
  */
 function primPartGan ($historial, $usuario){
     //int $aux, $indice, 
-    
-    //**COMPLETAR**
-
 
     $aux=0;
     foreach ($historial as $ind => $elemento){
@@ -179,6 +176,9 @@ function primPartGan ($historial, $usuario){
  * @return array 
  */
 function resumenStats ($partidas, $usuario){
+    //int $cantPart, $puntajeTotal, $int1, $int2, $int3, $int4, $int5, $int6, $victorias
+    //array $resumen
+
     $cantPart=0;
     $puntajeTotal=0;
     $int1=0;
@@ -237,10 +237,13 @@ function resumenStats ($partidas, $usuario){
 /*******************************EXPLICACION 3 PUNTO 10*******************************/
 
 /**
- * Le pregunta al usuario su nombre
+ * Le pregunta al usuario su nombre y verifica si la primera letra pertenece al abecedario, al ser true, el string ingresado se transforma en minúsculas
  * @return string
  */
 function solicitarJugador (){
+    //boolean $scan
+    //string $usuario, $startLengthStrg
+
     $scan=false;
         do{
         echo "Ingrese su nombre: \n";
@@ -264,6 +267,8 @@ function solicitarJugador (){
  * @return int
  */
 function comparadorString($str1, $str2){
+    //int $resultado
+
     $resultado = strcmp($str1["jugador"], $str2["jugador"]);
 
     if ($resultado == 0){
@@ -279,7 +284,7 @@ return ($resultado);
  */
 function ordenarAlfab($coleccionHistorial){
     uasort($coleccionHistorial, 'comparadorString'); //Ejecutada la función así ('comparadorString') debido a que son strings de un array pedido en esta función
-    print_r($coleccionHistorial);
+    print_r($coleccionHistorial); //Imprime el array obtenido
 }
 
 /*******************************EXPLICACION 3 PUNTO 12*******************************/
@@ -403,7 +408,8 @@ do {
  * @return boolean
  * */ 
 function palabraRepetida($nombre, $palabra, $historial){
-    // boolean $igual int $i, $cant, $seguir
+    //boolean $igual 
+    //int $i, $cant, $seguir
 
         $i=0;
         $cant=count($historial);
@@ -456,7 +462,8 @@ function palabraElegida ($coleccion, $nombre, $historial){
  * @return string
  */
 function opcAleatoria ($colecPalab, $nombre, $historial){
-    // int $max, $numAleatorio, string $palab
+    // int $max, $numAleatorio, 
+    // string $palab
     $max=count($colecPalab);
     $numAleatorio=rand(0,$max-1);
     $palab=$colecPalab[$numAleatorio];
@@ -475,8 +482,7 @@ function opcAleatoria ($colecPalab, $nombre, $historial){
  * @param int $max
  * @return int
  */
-function indiceMin($max)
-{
+function indiceMin($max){
     //int $indMin
     $indMin = $max - $max;
     return $indMin;
@@ -486,8 +492,7 @@ function indiceMin($max)
  * @param array $coleccionPalabras
  * @return int
  */
-function indiceMax($coleccionPalabras)
-{
+function indiceMax($coleccionPalabras){
     //int $indMax
     $indMax = count($coleccionPalabras) - 1;
     return $indMax;
