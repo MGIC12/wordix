@@ -18,6 +18,9 @@ include_once("wordix.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+
+/*******************************EXPLICACION 3 PUNTO 1*******************************/
+
 /**
  * Obtiene una colección de palabras
  * @return array
@@ -34,21 +37,31 @@ function cargarColeccionPalabras()
     return ($coleccionPalabras);
 }
 
-
+/*******************************EXPLICACION 3 PUNTO 2*******************************/
 
 /**
- * Imprime el logo de wordix
+ * obtiene una coleccion de partidas pasadas
+ * @return array
  */
-function logo(){
-    echo "\n";
-    echo "\n";
-    echo "░██╗░░░░░░░██╗░█████╗░██████╗░██████╗░██╗██╗░░██╗\n";
-    echo "░██║░░██╗░░██║██╔══██╗██╔══██╗██╔══██╗██║╚██╗██╔╝\n";
-    echo "░╚██╗████╗██╔╝██║░░██║██████╔╝██║░░██║██║░╚███╔╝░\n";
-    echo "░░████╔═████║░██║░░██║██╔══██╗██║░░██║██║░██╔██╗░\n";
-    echo "░░╚██╔╝░╚██╔╝░╚█████╔╝██║░░██║██████╔╝██║██╔╝╚██╗\n";
-    echo "░░░╚═╝░░░╚═╝░░░╚════╝░╚═╝░░╚═╝╚═════╝░╚═╝╚═╝░░╚═╝\n";
+function cargarPartidas(){
+    $coleccion = [];
+    $coleccion[0] = ["palabraWordix" => "QUESO", "jugador" => "gaspar", "intentos" => 5, "puntaje" => 11];
+    $coleccion[1] = ["palabraWordix" => "PIANO", "jugador" => "gaspar", "intentos" => 3, "puntaje" => 13];
+    $coleccion[2] = ["palabraWordix" => "ACERO", "jugador" => "julian", "intentos" => 0, "puntaje" => 0];
+    $coleccion[3] = ["palabraWordix" => "MELON", "jugador" => "facu", "intentos" => 4, "puntaje" => 12];
+    $coleccion[4] = ["palabraWordix" => "GOTAS", "jugador" => "julian", "intentos" => 3, "puntaje" => 13];
+    $coleccion[5] = ["palabraWordix" => "GOTAS", "jugador" => "gaspar", "intentos" => 1, "puntaje" => 15];
+    $coleccion[6] = ["palabraWordix" => "VERDE", "jugador" => "marcos", "intentos" => 5, "puntaje" => 12];
+    $coleccion[7] = ["palabraWordix" => "ACERO", "jugador" => "facu", "intentos" => 6, "puntaje" => 9];
+    $coleccion[8] = ["palabraWordix" => "HOJAS", "jugador" => "gaspar", "intentos" => 0, "puntaje" => 0];
+    $coleccion[9] = ["palabraWordix" => "ARBOL", "jugador" => "julian", "intentos" => 2, "puntaje" => 14];
+    $coleccion[10] = ["palabraWordix" => "YUYOS", "jugador" => "marcos", "intentos" => 3, "puntaje" => 15];
+    $coleccion[11] = ["palabraWordix" => "TINTO", "jugador" => "gaspar", "intentos" => 4, "puntaje" => 14];
+
+return ($coleccion);
 }
+
+/*******************************EXPLICACION 3 PUNTO 3*******************************/
 
 /** Muestra el menú para el usuario
  * @param string $player
@@ -76,82 +89,34 @@ function seleccionarOpcion()
     return $opcion;
 }
 
+/*******************************EXPLICACION 3 PUNTO 4*******************************/
+
+/*En archivo wordix.php lineas (161-178)*/
+
+/*******************************EXPLICACION 3 PUNTO 5*******************************/
+
+/*En archivo wordix.php lineas (29-53)
+
+/*******************************EXPLICACION 3 PUNTO 6*******************************/
 
 /**
- * Le pregunta al usuario su nombre
- * @return string
+ * Muestra el historial de la partida
+ * @param array $coleccionHistorial
+ * @param int $numPart
  */
-function solicitarJugador (){
-$scan=false;
-    do{
-    echo "Ingrese su nombre: \n";
-    $usuario = trim(fgets(STDIN));
-    $startLengthStrg = substr($usuario, 0, 1); //substr se utiliza para devolver parte de una cadena de un punto de inicio a uno final.
-    if (ctype_alpha($startLengthStrg)){ //ctype_alpha se utiliza para chequear caracteres alfabéticos.
-        $usuario = strtolower($usuario); //strtolower se lo utiliza para convertir el string en minúsculas.
-        $scan = true;
-    }else{
-        echo "El nombre debe comenzar con una letra...";
+function mostrarHistorial($coleccionHistorial, $numPart){
+    $partida = $coleccionHistorial[$numPart];
+    if ($partida["intentos"]>0){
+        echo "Partida WORDIX ".($numPart+1).": palabra ". $partida["palabraWordix"] . "\n" . "Jugador: " . $partida["jugador"] . "\n" . "Puntaje: " . $partida["puntaje"] . " puntos\n" . "Intento: Adivinó la palabra en " . $partida["intentos"] . " intentos";
+    } else {
+
+        echo "Partida WORDIX " . $numPart . ": palabra " . $partida["palabraWordix"] . "\n" . "Jugador: " . $partida["jugador"] . "\n" . "Puntaje: " . $partida["puntaje"] . " puntos" . "\n" . "Intento: No adivinó la palabra.";
     }
-}while ($scan == false);
-    return ($usuario);
+
 }
 
-/**
- * verifica si la palabra elegida ya fue utilizada por el gugador en el historial
- * @param string $nombre, $palabra
- * @param array $historial
- * @return boolean
- * */ 
-function palabraRepetida($nombre, $palabra, $historial){
-    // boolean $igual int $i, $cant, $seguir
+/*******************************EXPLICACION 3 PUNTO 7*******************************/
 
-        $i=0;
-        $cant=count($historial);
-        $seguir=0;
-
-        do{
-            if($historial[$i]["palabraWordix"]==$palabra && $historial[$i]["jugador"]==$nombre){
-                $seguir=1;
-            }else{
-                $i=$i+1;
-            }
-
-        }while($i<$cant&&$seguir==0);
-
-        if($seguir==0){
-            $igual=false;
-        }else{
-            $igual=true;
-        }
-
-        return $igual;
-    }
-
-
-/**
-     * Devuelve una palabra del listado a partir de un numero
-     * @param array $coleccion, $nombre, $historial
-     * @return string 
-     */
-    function palabraElegida ($coleccion, $nombre, $historial){
-        $max=count($coleccion);
-        echo "Ingrese el numero de la palabra: ";
-        $numPalabra=solicitarNumeroEntre(1, $max)-1;
-        $palabraEleg=$coleccion[$numPalabra];
-        $esIgual=palabraRepetida($nombre, $palabraEleg, $historial);
-        while($esIgual){
-            echo "Ingrese otro numero: ";
-            $numPalabra=solicitarNumeroEntre(1, $max)-1;
-            $palabraEleg=$coleccion[$numPalabra];
-            $esIgual=palabraRepetida($nombre, $palabraEleg, $historial);
-        }
-        
-    return $palabraEleg;
-
-    }
-
-    
 /**
  * verifica que la palabra a ingresar no este en el arreglo de palabra, tenga 5 letras
  * @param array $coleccionPalabras
@@ -172,52 +137,8 @@ function agregarPalabra($coleccionPalabras, $palabra5L){
     }
 return ($coleccionPalabras);
 }
-   
 
-/**
- * devuelve una palabra aleatoria de la coleccion
- * @param array $colecPalab, $nombre, $historial
- * @return string
- */
-function opcAleatoria ($colecPalab, $nombre, $historial){
-    // int $max, $numAleatorio, string $palab
-    $max=count($colecPalab);
-    $numAleatorio=rand(0,$max-1);
-    $palab=$colecPalab[$numAleatorio];
-    $esIgual=palabraRepetida($nombre, $palab, $historial);
-        while($esIgual){
-            $numAleatorio=rand(0,$max-1);
-            $palab=$colecPalab[$numAleatorio];
-            $esIgual=palabraRepetida($nombre, $palab, $historial);
-        }
-
-    return ($palab);
-}
-
-
-/**
- * obtiene una coleccion de partidas pasadas
- * @return array
- */
-function cargarPartidas(){
-    $coleccion = [];
-    $coleccion[0] = ["palabraWordix" => "QUESO", "jugador" => "gaspar", "intentos" => 5, "puntaje" => 11];
-    $coleccion[1] = ["palabraWordix" => "PIANO", "jugador" => "gaspar", "intentos" => 3, "puntaje" => 13];
-    $coleccion[2] = ["palabraWordix" => "ACERO", "jugador" => "julian", "intentos" => 0, "puntaje" => 0];
-    $coleccion[3] = ["palabraWordix" => "MELON", "jugador" => "facu", "intentos" => 4, "puntaje" => 12];
-    $coleccion[4] = ["palabraWordix" => "GOTAS", "jugador" => "julian", "intentos" => 3, "puntaje" => 13];
-    $coleccion[5] = ["palabraWordix" => "GOTAS", "jugador" => "gaspar", "intentos" => 1, "puntaje" => 15];
-    $coleccion[6] = ["palabraWordix" => "VERDE", "jugador" => "marcos", "intentos" => 5, "puntaje" => 12];
-    $coleccion[7] = ["palabraWordix" => "ACERO", "jugador" => "facu", "intentos" => 6, "puntaje" => 9];
-    $coleccion[8] = ["palabraWordix" => "HOJAS", "jugador" => "gaspar", "intentos" => 0, "puntaje" => 0];
-    $coleccion[9] = ["palabraWordix" => "ARBOL", "jugador" => "julian", "intentos" => 2, "puntaje" => 14];
-    $coleccion[10] = ["palabraWordix" => "YUYOS", "jugador" => "marcos", "intentos" => 3, "puntaje" => 15];
-    $coleccion[11] = ["palabraWordix" => "TINTO", "jugador" => "gaspar", "intentos" => 4, "puntaje" => 14];
-
-return ($coleccion);
-}
-
-
+/*******************************EXPLICACION 3 PUNTO 8*******************************/
 
 /**
  * devuelve el indice de la primera partida ganada por el jugador ingresado
@@ -241,24 +162,7 @@ function primPartGan ($historial, $usuario){
     return ($indice);
 }
 
-
-
-
-/**
- * Muestra el historial de la partida
- * @param array $coleccionHistorial
- * @param int $numPart
- */
-function mostrarHistorial($coleccionHistorial, $numPart){
-    $partida = $coleccionHistorial[$numPart];
-    if ($partida["intentos"]>0){
-        echo "Partida WORDIX ".($numPart+1).": palabra ". $partida["palabraWordix"] . "\n" . "Jugador: " . $partida["jugador"] . "\n" . "Puntaje: " . $partida["puntaje"] . " puntos\n" . "Intento: Adivinó la palabra en " . $partida["intentos"] . " intentos";
-    } else {
-
-        echo "Partida WORDIX " . $numPart . ": palabra " . $partida["palabraWordix"] . "\n" . "Jugador: " . $partida["jugador"] . "\n" . "Puntaje: " . $partida["puntaje"] . " puntos" . "\n" . "Intento: No adivinó la palabra.";
-    }
-
-}
+/*******************************EXPLICACION 3 PUNTO 9*******************************/
 
 /**
  * evalua el historial de estadisticas y devuelve una estructura
@@ -322,6 +226,29 @@ function resumenStats ($partidas, $usuario){
     return ($resumen);
 }
 
+/*******************************EXPLICACION 3 PUNTO 10*******************************/
+
+/**
+ * Le pregunta al usuario su nombre
+ * @return string
+ */
+function solicitarJugador (){
+    $scan=false;
+        do{
+        echo "Ingrese su nombre: \n";
+        $usuario = trim(fgets(STDIN));
+        $startLengthStrg = substr($usuario, 0, 1); //substr se utiliza para devolver parte de una cadena de un punto de inicio a uno final.
+        if (ctype_alpha($startLengthStrg)){ //ctype_alpha se utiliza para chequear caracteres alfabéticos.
+            $usuario = strtolower($usuario); //strtolower se lo utiliza para convertir el string en minúsculas.
+            $scan = true;
+        }else{
+            echo "El nombre debe comenzar con una letra...";
+        }
+    }while ($scan == false);
+        return ($usuario);
+    }
+
+/*******************************EXPLICACION 3 PUNTO 11*******************************/
 
 /**
  * Compara los strings y determina cuál es mayor y cuál es menor
@@ -347,59 +274,7 @@ function ordenarAlfab($coleccionHistorial){
     print_r($coleccionHistorial);
 }
 
-
-/** Determina el indice Minimo de un array
- * @param int $max
- * @return int
- */
-function indiceMin($max)
-{
-    //int $indMin
-    $indMin = $max - $max;
-    return $indMin;
-}
-
-/** Determina el indice maximo de un array
- * @param array $coleccionPalabras
- * @return int
- */
-function indiceMax($coleccionPalabras)
-{
-    //int $indMax
-    $indMax = count($coleccionPalabras) - 1;
-    return $indMax;
-}
-
-
-/**
- * Texto final del juego
- */
-function textoSalir(){
-    echo " 
-    __                                                       
-   / _   _  _   _ .  _   _    _   _   _   .      _   _   _ | 
-   \__) |  (_| (_ | (_| _)   |_) (_) |    | |_| (_) (_| |  . 
-                             |            /     _/           \n";
-    echo "
-    ░░░░░░░░░░░░░░░░░░░░░░█████████░░░░░░░░░
-    ░░███████░░░░░░░░░░███▒▒▒▒▒▒▒▒███░░░░░░░
-    ░░█▒▒▒▒▒▒█░░░░░░░███▒▒▒▒▒▒▒▒▒▒▒▒▒███░░░░
-    ░░░█▒▒▒▒▒▒█░░░░██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░
-    ░░░░█▒▒▒▒▒█░░░██▒▒▒▒▒██▒▒▒▒▒▒██▒▒▒▒▒███░
-    ░░░░░█▒▒▒█░░░█▒▒▒▒▒▒████▒▒▒▒████▒▒▒▒▒▒██
-    ░░░█████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██
-    ░░░█▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒██
-    ░██▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒██▒▒▒▒▒▒▒▒▒▒██▒▒▒▒██
-    ██▒▒▒███████████▒▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒▒██
-    █▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒████████▒▒▒▒▒▒▒██
-    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░
-    ░█▒▒▒███████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░░
-    ░██▒▒▒▒▒▒▒▒▒▒████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█░░░░░
-    ░░████████████░░░█████████████████░░░░░░";
-}
-/* ****COMPLETAR***** */
-
-
+/*******************************EXPLICACION 3 PUNTO 12*******************************/
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -506,6 +381,148 @@ do {
     }
 } while ($opcionMenu != 8);
 
-/**$partida = jugarWordix("MELON", strtolower("MaJo"));*/
-//print_r($partida);
-//imprimirResultado($partida);
+
+/***************************************************************************************/
+/*******************************FUNCIONES COMPLEMENTARIAS*******************************/
+/***************************************************************************************/
+
+
+
+/**
+ * verifica si la palabra elegida ya fue utilizada por el gugador en el historial
+ * @param string $nombre, $palabra
+ * @param array $historial
+ * @return boolean
+ * */ 
+function palabraRepetida($nombre, $palabra, $historial){
+    // boolean $igual int $i, $cant, $seguir
+
+        $i=0;
+        $cant=count($historial);
+        $seguir=0;
+
+        do{
+            if($historial[$i]["palabraWordix"]==$palabra && $historial[$i]["jugador"]==$nombre){
+                $seguir=1;
+            }else{
+                $i=$i+1;
+            }
+
+        }while($i<$cant&&$seguir==0);
+
+        if($seguir==0){
+            $igual=false;
+        }else{
+            $igual=true;
+        }
+
+        return $igual;
+    }
+
+
+/**
+* Devuelve una palabra del listado a partir de un numero
+* @param array $coleccion, $nombre, $historial
+* @return string 
+*/
+function palabraElegida ($coleccion, $nombre, $historial){
+    $max=count($coleccion);
+    echo "Ingrese el numero de la palabra: ";
+    $numPalabra=solicitarNumeroEntre(1, $max)-1;
+    $palabraEleg=$coleccion[$numPalabra];
+    $esIgual=palabraRepetida($nombre, $palabraEleg, $historial);
+    while($esIgual){
+        echo "Ingrese otro numero: ";
+        $numPalabra=solicitarNumeroEntre(1, $max)-1;
+        $palabraEleg=$coleccion[$numPalabra];
+        $esIgual=palabraRepetida($nombre, $palabraEleg, $historial);
+    }
+        
+    return $palabraEleg;
+}
+  
+
+/**
+ * devuelve una palabra aleatoria de la coleccion
+ * @param array $colecPalab, $nombre, $historial
+ * @return string
+ */
+function opcAleatoria ($colecPalab, $nombre, $historial){
+    // int $max, $numAleatorio, string $palab
+    $max=count($colecPalab);
+    $numAleatorio=rand(0,$max-1);
+    $palab=$colecPalab[$numAleatorio];
+    $esIgual=palabraRepetida($nombre, $palab, $historial);
+        while($esIgual){
+            $numAleatorio=rand(0,$max-1);
+            $palab=$colecPalab[$numAleatorio];
+            $esIgual=palabraRepetida($nombre, $palab, $historial);
+        }
+
+    return ($palab);
+}
+
+
+/** Determina el indice Minimo de un array
+ * @param int $max
+ * @return int
+ */
+function indiceMin($max)
+{
+    //int $indMin
+    $indMin = $max - $max;
+    return $indMin;
+}
+
+/** Determina el indice maximo de un array
+ * @param array $coleccionPalabras
+ * @return int
+ */
+function indiceMax($coleccionPalabras)
+{
+    //int $indMax
+    $indMax = count($coleccionPalabras) - 1;
+    return $indMax;
+}
+
+
+/**
+ * Imprime el logo de wordix
+ */
+function logo(){
+    echo "\n";
+    echo "\n";
+    echo "░██╗░░░░░░░██╗░█████╗░██████╗░██████╗░██╗██╗░░██╗\n";
+    echo "░██║░░██╗░░██║██╔══██╗██╔══██╗██╔══██╗██║╚██╗██╔╝\n";
+    echo "░╚██╗████╗██╔╝██║░░██║██████╔╝██║░░██║██║░╚███╔╝░\n";
+    echo "░░████╔═████║░██║░░██║██╔══██╗██║░░██║██║░██╔██╗░\n";
+    echo "░░╚██╔╝░╚██╔╝░╚█████╔╝██║░░██║██████╔╝██║██╔╝╚██╗\n";
+    echo "░░░╚═╝░░░╚═╝░░░╚════╝░╚═╝░░╚═╝╚═════╝░╚═╝╚═╝░░╚═╝\n";
+}
+
+/**
+ * Texto final del juego
+ */
+function textoSalir(){
+    echo " 
+    __                                                       
+   / _   _  _   _ .  _   _    _   _   _   .      _   _   _ | 
+   \__) |  (_| (_ | (_| _)   |_) (_) |    | |_| (_) (_| |  . 
+                             |            /     _/           \n";
+    echo "
+    ░░░░░░░░░░░░░░░░░░░░░░█████████░░░░░░░░░
+    ░░███████░░░░░░░░░░███▒▒▒▒▒▒▒▒███░░░░░░░
+    ░░█▒▒▒▒▒▒█░░░░░░░███▒▒▒▒▒▒▒▒▒▒▒▒▒███░░░░
+    ░░░█▒▒▒▒▒▒█░░░░██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░
+    ░░░░█▒▒▒▒▒█░░░██▒▒▒▒▒██▒▒▒▒▒▒██▒▒▒▒▒███░
+    ░░░░░█▒▒▒█░░░█▒▒▒▒▒▒████▒▒▒▒████▒▒▒▒▒▒██
+    ░░░█████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██
+    ░░░█▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒██
+    ░██▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒██▒▒▒▒▒▒▒▒▒▒██▒▒▒▒██
+    ██▒▒▒███████████▒▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒▒██
+    █▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒████████▒▒▒▒▒▒▒██
+    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░
+    ░█▒▒▒███████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░░
+    ░██▒▒▒▒▒▒▒▒▒▒████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█░░░░░
+    ░░████████████░░░█████████████████░░░░░░";
+}
