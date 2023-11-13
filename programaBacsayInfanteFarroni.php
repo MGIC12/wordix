@@ -65,7 +65,7 @@ return ($coleccion);
 /*******************************EXPLICACION 3 PUNTO 3*******************************/
 
 /** Muestra el menú para el usuario
- * @param string $player
+ * @return int
  */
 function seleccionarOpcion()
 {//int $minMenu, $maxMenu, $opcion
