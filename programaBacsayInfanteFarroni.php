@@ -293,7 +293,13 @@ function ordenarAlfab($coleccionHistorial){
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
 
+/* PROGRAMA PRINCIPAL wordix*/
+/* le permite al usuario jugar wordix, consultar el historial y agrgar palabras nuevas al juego */
+
 //Declaración de variables:
+//int $opcionMenu, $minMenu, $maxMenu, $maxArray, $minArray, $numPartida, $indice
+//string $nombre, $palabraSelecc, $palabra5L
+// array $coleccionPartidas, $coleccionPalabras, $partidas, $resumen
 
 
 //Inicialización de variables:
