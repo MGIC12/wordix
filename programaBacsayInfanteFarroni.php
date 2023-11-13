@@ -317,7 +317,7 @@ logo();
 do {
     
     $opcionMenu = seleccionarOpcion();
-    switch ($opcionMenu){
+    switch ($opcionMenu){ // switch: hace referencia a las estructuras de control if...elseif
         case 1:
             $nombre=solicitarJugador();
             $palabraSelecc=palabraElegida($coleccionPalabras, $nombre, $coleccionPartidas);
