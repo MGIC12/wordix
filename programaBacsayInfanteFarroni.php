@@ -484,18 +484,6 @@ function opcAleatoria ($colecPalab, $nombre, $historial){
 }
 
 
-
-/** Determina el indice maximo de un array
- * @param array $coleccionPalabras
- * @return int
- */
-function indiceMax($coleccionPalabras){
-    //int $indMax
-    $indMax = count($coleccionPalabras) - 1;
-    return $indMax;
-}
-
-
 /**
  * Imprime el logo de wordix
  */
