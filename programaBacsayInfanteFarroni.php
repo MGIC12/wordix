@@ -95,7 +95,7 @@ function seleccionarOpcion(){
 
 /*******************************EXPLICACION 3 PUNTO 5*******************************/
 
-/*En archivo wordix.php lineas (29-53)
+/*En archivo wordix.php lineas (29-53)*/
 
 /*******************************EXPLICACION 3 PUNTO 6*******************************/
 
@@ -263,7 +263,8 @@ function solicitarJugador (){
 
 /**
  * Compara los strings y determina cuál es mayor y cuál es menor
- * @param string $str1, $str2
+ * @param string $str1
+ * @param string $str2
  * @return int
  */
 function comparadorString($str1, $str2){
@@ -297,8 +298,8 @@ function ordenarAlfab($coleccionHistorial){
 /* le permite al usuario jugar wordix, consultar el historial y agrgar palabras nuevas al juego */
 
 //Declaración de variables:
-//int $opcionMenu, $minMenu, $maxMenu, $maxArray, $minArray, $numPartida, $indice
-//string $nombre, $palabraSelecc, $palabra5L
+// int $opcionMenu, $minMenu, $maxMenu, $maxArray, $minArray, $numPartida, $indice
+// string $nombre, $palabraSelecc, $palabra5L
 // array $coleccionPartidas, $coleccionPalabras, $partidas, $resumen
 
 
@@ -401,6 +402,11 @@ do {
 } while ($opcionMenu != 8);
 
 
+
+
+
+
+
 /***************************************************************************************/
 /*******************************FUNCIONES COMPLEMENTARIAS*******************************/
 /***************************************************************************************/
@@ -409,7 +415,8 @@ do {
 
 /**
  * verifica si la palabra elegida ya fue utilizada por el gugador en el historial
- * @param string $nombre, $palabra
+ * @param string $nombre
+ * @param string $palabra
  * @param array $historial
  * @return boolean
  * */ 
@@ -442,10 +449,15 @@ function palabraRepetida($nombre, $palabra, $historial){
 
 /**
 * Devuelve una palabra del listado a partir de un numero
-* @param array $coleccion, $nombre, $historial
+* @param array $coleccion
+* @param string $nombre
+* @param array $historial
 * @return string 
 */
 function palabraElegida ($coleccion, $nombre, $historial){
+    // int $max $numPalabra
+    // string $palabraEleg
+    // boolean $esIgual
     $max=count($coleccion);
     echo "Ingrese el numero de la palabra: ";
     $numPalabra=solicitarNumeroEntre(1, $max)-1;
@@ -464,12 +476,15 @@ function palabraElegida ($coleccion, $nombre, $historial){
 
 /**
  * devuelve una palabra aleatoria de la coleccion
- * @param array $colecPalab, $nombre, $historial
+ * @param array $colecPalab
+ * @param string $nombre
+ * @param array $historial
  * @return string
  */
 function opcAleatoria ($colecPalab, $nombre, $historial){
     // int $max, $numAleatorio, 
     // string $palab
+    // boolean $esIgual
     $max=count($colecPalab);
     $numAleatorio=rand(0,$max-1);
     $palab=$colecPalab[$numAleatorio];
