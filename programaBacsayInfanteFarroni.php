@@ -45,7 +45,7 @@ function cargarColeccionPalabras(){
  */
 function cargarPartidas(){
     //array $coleccion
-    $coleccion = [];
+    /*$coleccion = [];
     $coleccion[0] = ["palabraWordix" => "QUESO", "jugador" => "gaspar", "intentos" => 5, "puntaje" => 11];
     $coleccion[1] = ["palabraWordix" => "PIANO", "jugador" => "gaspar", "intentos" => 3, "puntaje" => 13];
     $coleccion[2] = ["palabraWordix" => "ACERO", "jugador" => "julian", "intentos" => 0, "puntaje" => 0];
@@ -58,8 +58,25 @@ function cargarPartidas(){
     $coleccion[9] = ["palabraWordix" => "ARBOL", "jugador" => "julian", "intentos" => 2, "puntaje" => 14];
     $coleccion[10] = ["palabraWordix" => "YUYOS", "jugador" => "marcos", "intentos" => 3, "puntaje" => 15];
     $coleccion[11] = ["palabraWordix" => "TINTO", "jugador" => "gaspar", "intentos" => 4, "puntaje" => 14];
+    */
+    $coleccion = [];
+$pa1 = ["palabraWordix" => "SUECO", "jugador" => "kleiton", "intentos" => 0, "puntaje" => 0];
+$pa2 = ["palabraWordix" => "YUYOS", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
+$pa3 = ["palabraWordix" => "HUEVO", "jugador" => "zrack", "intentos" => 3, "puntaje" => 9];
+$pa4 = ["palabraWordix" => "TINTO", "jugador" => "cabrito", "intentos" => 4, "puntaje" => 8];
+$pa5 = ["palabraWordix" => "RASGO", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
+$pa6 = ["palabraWordix" => "VERDE", "jugador" => "cabrito", "intentos" => 5, "puntaje" => 7];
+$pa7 = ["palabraWordix" => "CASAS", "jugador" => "kleiton", "intentos" => 5, "puntaje" => 7];
+$pa8 = ["palabraWordix" => "GOTAS", "jugador" => "kleiton", "intentos" => 0, "puntaje" => 0];
+$pa9 = ["palabraWordix" => "ZORRO", "jugador" => "zrack", "intentos" => 4, "puntaje" => 8];
+$pa10 = ["palabraWordix" => "GOTAS", "jugador" => "cabrito", "intentos" => 0, "puntaje" => 0];
+$pa11 = ["palabraWordix" => "FUEGO", "jugador" => "cabrito", "intentos" => 2, "puntaje" => 10];
+$pa12 = ["palabraWordix" => "TINTO", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
 
-return ($coleccion);
+array_push($coleccion, $pa1, $pa2, $pa3, $pa4, $pa5, $pa6, $pa7, $pa8, $pa9, $pa10, $pa11, $pa12);
+return $coleccion;
+/*
+return ($coleccion);*/
 }
 
 /*******************************EXPLICACION 3 PUNTO 3*******************************/
@@ -152,6 +169,31 @@ return ($coleccionPalabras);
 function primPartGan ($historial, $usuario){
     //int $aux, $indice, 
 
+    $i=0;
+    $n=count($historial);
+    $jugo=false;
+    while ($i<$n && $historial[$i]["jugador"]!=$usuario){
+        $i++;
+    }
+    if ($i<$n){
+        $jugo=true;
+    }
+    $i=0;
+    while($i<$n && ($historial[$i]["jugador"]!= $usuario || $historial[$i]["puntaje"]<1)){
+        $i++;
+    }
+    if ($i<$n){
+        $indice=$i;
+    }else{
+        if ($jugo==true){
+            $indice=-1;
+        }else{
+            $indice=-2;
+        }
+    }
+    return ($indice);
+
+    /*
     $aux=0;
     foreach ($historial as $ind => $elemento){
         if ($historial[$ind]["jugador"]==$usuario){
@@ -165,6 +207,7 @@ function primPartGan ($historial, $usuario){
         $indice = -1;
     }
     return ($indice);
+    */
 }
 
 /*******************************EXPLICACION 3 PUNTO 9*******************************/
@@ -232,6 +275,29 @@ function resumenStats ($partidas, $usuario){
         "intento6" => $int6,
     ];
     return ($resumen);
+}
+
+/**
+ * Imprime el resumen del jugador
+ * @param array $resumen
+ */
+function impResu ($resumen){
+    if ($resumen["partidas"]>0){
+        echo "\nJugador: ".$resumen["jugador"];
+        echo "\nPartidas: ".$resumen["partidas"];
+        echo "\nPuntaje Total: ".$resumen["puntaje"];
+        echo "\nVictorias: ".$resumen["victoria"];
+        echo "\nPorcentaje Victorias: ".($resumen["victoria"]*100/$resumen["partidas"])."%";
+        echo "\nAdivinadas: ";
+        echo "\n    Intento 1: ".$resumen["intento1"];
+        echo "\n    Intento 2: ".$resumen["intento2"];
+        echo "\n    Intento 3: ".$resumen["intento3"];
+        echo "\n    Intento 4: ".$resumen["intento4"];
+        echo "\n    Intento 5: ".$resumen["intento5"];
+        echo "\n    Intento 6: ".$resumen["intento6"];
+    }else{
+        echo "este jugador no se encuentra en la base de datos";
+    }
 }
 
 /*******************************EXPLICACION 3 PUNTO 10*******************************/
@@ -354,8 +420,10 @@ do {
                     echo "\nJugador: ".$coleccionPartidas[$indice]["jugador"];
                     echo "\nPuntaje: ".$coleccionPartidas[$indice]["puntaje"];
                     echo "\nIntento: Adivino la palabra en ".$coleccionPartidas[$indice]["intentos"]." intentos";
-                }else{
+                }elseif($indice==-1){
                     echo "\nEl jugador ".$nombre." no ganó ninguna partida";
+                }else{
+                    echo "\nEste usuario no jugo ninguna partida";
                 }
 	            echo "\n******************************************************************\n";
             break;
@@ -364,22 +432,7 @@ do {
             $nombre=solicitarJugador();
             $resumen=resumenStats($coleccionPartidas, $nombre);
             echo "\n******************************************************************\n";
-            if ($resumen["partidas"]>0){
-                echo "\nJugador: ".$resumen["jugador"];
-                echo "\nPartidas: ".$resumen["partidas"];
-                echo "\nPuntaje Total: ".$resumen["puntaje"];
-                echo "\nVictorias: ".$resumen["victoria"];
-                echo "\nPorcentaje Victorias: ".($resumen["victoria"]*100/$resumen["partidas"])."%";
-                echo "\nAdivinadas: ";
-                echo "\n    Intento 1: ".$resumen["intento1"];
-                echo "\n    Intento 2: ".$resumen["intento2"];
-                echo "\n    Intento 3: ".$resumen["intento3"];
-                echo "\n    Intento 4: ".$resumen["intento4"];
-                echo "\n    Intento 5: ".$resumen["intento5"];
-                echo "\n    Intento 6: ".$resumen["intento6"];
-            }else{
-                echo "este jugador no se encuentra en la base de datos";
-            }
+            impResu($resumen);
             echo "\n******************************************************************\n";
             break;
 
